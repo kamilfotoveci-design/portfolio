@@ -65,20 +65,28 @@ if(!reduceMotion&&matchMedia('(pointer:fine)').matches){
   addEventListener('pointermove',event=>{
     cursor.style.setProperty('--cx',`${event.clientX}px`);cursor.style.setProperty('--cy',`${event.clientY}px`);
   },{passive:true});
+  const depth={x:0,y:0,bgX:0,bgY:0,rx:0,ry:0};
+  const depthTarget={x:0,y:0,bgX:0,bgY:0,rx:0,ry:0};
+  (function stepDepth(){
+    const ease=.13;
+    for(const key in depth)depth[key]+=(depthTarget[key]-depth[key])*ease;
+    portrait.style.setProperty('--depth-x',`${depth.x}px`);portrait.style.setProperty('--depth-y',`${depth.y}px`);
+    portrait.style.setProperty('--depth-bg-x',`${depth.bgX}px`);portrait.style.setProperty('--depth-bg-y',`${depth.bgY}px`);
+    portrait.style.setProperty('--portrait-rx',`${depth.rx}deg`);portrait.style.setProperty('--portrait-ry',`${depth.ry}deg`);
+    requestAnimationFrame(stepDepth);
+  })();
   const resetSpatial=()=>{
     hero.classList.remove('is-spatial');
-    portrait.style.setProperty('--depth-x','0px');portrait.style.setProperty('--depth-y','0px');
-    portrait.style.setProperty('--depth-bg-x','0px');portrait.style.setProperty('--depth-bg-y','0px');
-    portrait.style.setProperty('--portrait-rx','0deg');portrait.style.setProperty('--portrait-ry','0deg');
+    Object.assign(depthTarget,{x:0,y:0,bgX:0,bgY:0,rx:0,ry:0});
   };
   hero.addEventListener('pointerenter',()=>hero.classList.add('is-spatial'));
   hero.addEventListener('pointermove',event=>{
     const rect=hero.getBoundingClientRect();
     const nx=Math.max(-1,Math.min(1,((event.clientX-rect.left)/rect.width-.5)*2));
     const ny=Math.max(-1,Math.min(1,((event.clientY-rect.top)/rect.height-.5)*2));
-    portrait.style.setProperty('--depth-x',`${nx*11}px`);portrait.style.setProperty('--depth-y',`${ny*7}px`);
-    portrait.style.setProperty('--depth-bg-x',`${nx*-7}px`);portrait.style.setProperty('--depth-bg-y',`${ny*-4}px`);
-    portrait.style.setProperty('--portrait-rx',`${ny*-1.6}deg`);portrait.style.setProperty('--portrait-ry',`${nx*2.2}deg`);
+    depthTarget.x=nx*13;depthTarget.y=ny*8;
+    depthTarget.bgX=nx*-7;depthTarget.bgY=ny*-4;
+    depthTarget.rx=ny*-2.4;depthTarget.ry=nx*3.2;
   },{passive:true});
   hero.addEventListener('pointerleave',resetSpatial);
   document.querySelectorAll('.cursor-target').forEach(el=>{
@@ -104,7 +112,7 @@ if(!reduceMotion&&matchMedia('(pointer:fine)').matches){
     root.style.scrollSnapType='none';root.style.scrollBehavior='auto';
     function step(now){
       const dt=Math.min((now-last)/1000,.032);last=now;
-      const acceleration=(target-position)*115-velocity*16;
+      const acceleration=(target-position)*58-velocity*15;
       velocity+=acceleration*dt;position+=velocity*dt;
       scrollTo(0,position);
       if(Math.abs(target-position)<.45&&Math.abs(velocity)<2){
