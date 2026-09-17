@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Nezávislý AI produktový tvůrce — strategie, design a vývoj.">
+  <meta name="theme-color" content="#f3f1e9">
+  <title>Kamil Hortík — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111310'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-size='23' font-weight='700' fill='%236f7d68'%3EKH%3C/text%3E%3C/svg%3E">
+</head>
+<body class="loading">
+  <div class="loader" aria-hidden="true"><span>KH</span><i></i></div>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span data-i18n="cursorView">Otevřít</span></div>
+
+  <header class="site-header" id="header">
+    <nav class="nav shell" aria-label="Hlavní navigace" data-i18n-aria="navAria">
+      <a class="brand magnetic" href="#top" aria-label="Kamil Hortík — nahoru" data-i18n-aria="topAria"><span>KH</span><strong>Kamil Hortík Portfolio</strong></a>
+      <div class="nav-right">
+        <a href="#work" data-i18n="navWork">Projekty</a>
+        <a href="#contact" data-i18n="navContact">Kontakt</a>
+        <div class="languages" role="group" aria-label="Jazyk" data-i18n-aria="languageAria">
+          <span class="lang-thumb"></span>
+          <button type="button" data-lang="cs" aria-pressed="true">CZ</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell snap-panel" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="hero-title" aria-label="Kamil Hortík Portfolio">
+        <span class="title-line"><span data-i18n="heroLine1">KAMIL</span></span>
+        <span class="title-line title-line--shift"><span><b data-i18n="heroLine2b">HORTÍK</b></span></span>
+        <span class="title-line title-line--portfolio"><span>PORTFOLIO</span></span>
+      </h1>
+      <figure class="hero-portrait" aria-hidden="true"><img src="assets/profile.png" alt="" width="1296" height="1214" fetchpriority="high"></figure>
+    </section>
+
+    <section class="work" id="work" aria-label="Projects">
+      <article class="project shell snap-panel" data-project="01">
+        <div class="project-copy reveal"><h2>Lasero</h2><p data-i18n="laseroDesc">AI pracovní prostor pro laserové gravírování. Doporučí nastavení podle stroje a materiálu a připraví fotografie pro výrobu.</p></div>
+        <a class="project-visual cursor-target reveal" id="lasero-preview" href="https://lasero.net" target="_blank" rel="noopener" aria-label="Otevřít Lasero" data-i18n-aria="openLasero"><div class="image-wrap"><img src="assets/lasero.png" alt="Landing page projektu Lasero" data-i18n-alt="laseroAlt" width="1440" height="1000" loading="lazy"></div></a>
+      </article>
+
+      <article class="project shell snap-panel" data-project="02">
+        <div class="project-copy reveal"><h2>Načas</h2><p data-i18n="nacasDesc">Fakturace pro malé firmy v Česku a na Slovensku. Vytváří profesionální PDF, QR platby a přehled stavu úhrad.</p></div>
+        <a class="project-visual cursor-target reveal" href="https://nacas.pages.dev" target="_blank" rel="noopener" aria-label="Otevřít Načas" data-i18n-aria="openNacas"><div class="image-wrap"><img src="assets/nacas.png" alt="Landing page projektu Načas" data-i18n-alt="nacasAlt" width="1440" height="1000" loading="lazy"></div></a>
+      </article>
+
+      <article class="project shell snap-panel" data-project="03">
+        <div class="project-copy reveal"><h2>SubSentry</h2><p data-i18n="subsentryDesc">Soukromý přehled opakovaných plateb bez připojení banky. Ukáže měsíční i roční náklady a pomůže rozhodnout, co si ponechat.</p></div>
+        <a class="project-visual cursor-target reveal" href="https://subsentry.pages.dev" target="_blank" rel="noopener" aria-label="Otevřít SubSentry" data-i18n-aria="openSubsentry"><div class="image-wrap"><img src="assets/subsentry.png" alt="Landing page projektu SubSentry" data-i18n-alt="subsentryAlt" width="1440" height="1000" loading="lazy"></div></a>
+      </article>
+    </section>
+
+  </main>
+
+  <footer id="contact" class="snap-panel"><div class="contact shell"><div class="contact-main reveal"><h2><a class="magnetic contact-link" href="mailto:hello@lasero.net"><span data-i18n="contactTitle">Napište mi.</span></a></h2></div></div></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
