@@ -1,0 +1,156 @@
+/* Typography direction: expressive grotesk display + calm editorial body. */
+html {
+  scroll-snap-type: y mandatory;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+}
+
+:root {
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "Source Sans 3", sans-serif;
+  --font-mono: "DM Mono", monospace;
+  --text-display-xl: clamp(4.75rem, 13vw, 13.75rem);
+  --text-display: clamp(3.25rem, 7vw, 7rem);
+  --text-h1: clamp(3.25rem, 8vw, 8rem);
+  --text-h2: clamp(2.75rem, 5.8vw, 6rem);
+  --text-h3: clamp(2.25rem, 4.5vw, 4.75rem);
+  --text-body-lg: clamp(1.15rem, 1.7vw, 1.45rem);
+  --text-body: clamp(1rem, 1.1vw, 1.125rem);
+  --text-small: 0.875rem;
+  --text-caption: 0.68rem;
+  --tracking-display: -0.065em;
+  --tracking-body: -0.012em;
+  --leading-display: 0.86;
+  --leading-body: 1.5;
+  font-family: var(--font-body);
+  font-optical-sizing: auto;
+}
+
+body,
+button {
+  font-family: var(--font-body);
+}
+
+.mono,
+.brand-mark,
+.lang {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  letter-spacing: 0.06em;
+}
+
+.brand,
+.site-header nav {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-body);
+}
+
+h1,
+h2,
+h3,
+.contact-link,
+.contact-cta,
+.dialog-bottom h2 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 48, "wdth" 92;
+  letter-spacing: var(--tracking-display);
+  text-transform: none;
+}
+
+h1 {
+  font-size: var(--text-display-xl);
+  line-height: var(--leading-display);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+h1 em {
+  font-style: normal;
+  font-weight: 420;
+}
+
+.hero-note,
+.section-lede,
+.project-info p,
+.project-caption,
+.about-grid > div > p:last-child {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+}
+
+.hero-note {
+  max-width: 34ch;
+  font-size: var(--text-body-lg);
+  line-height: 1.25;
+}
+
+.section-intro h2,
+.about h2 {
+  font-size: var(--text-h2);
+  line-height: 0.94;
+  font-weight: 560;
+}
+
+.project-info h3 {
+  font-size: var(--text-h3);
+  line-height: 0.92;
+  font-weight: 560;
+}
+
+.project--nacas .project-info h3 {
+  font-variation-settings: "opsz" 48, "wdth" 82;
+}
+
+.project--subsentry .project-info h3 {
+  font-weight: 430;
+}
+
+.about-lede {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.65rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  font-weight: 470;
+}
+
+.contact h2 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 48, "wdth" 88;
+  font-size: clamp(5rem, 16vw, 16.25rem);
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+  font-weight: 560;
+}
+
+.contact-link,
+.contact-cta {
+  font-weight: 520;
+}
+
+@media (max-width: 760px) {
+  h1 {
+    font-size: clamp(4.75rem, 21vw, 9.4rem);
+    line-height: 0.82;
+  }
+
+  .section-intro h2,
+  .about h2 {
+    font-size: clamp(3rem, 14vw, 5.25rem);
+  }
+
+  .project-info h3 {
+    font-size: clamp(2.65rem, 13vw, 4.5rem);
+  }
+
+  .hero-note {
+    max-width: 28ch;
+  }
+}
