@@ -4,10 +4,6 @@ html {
   scroll-behavior: smooth;
 }
 
-html.gsap-ready {
-  scroll-snap-type: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-snap-type: y proximity;
