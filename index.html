@@ -15,13 +15,14 @@
   </head>
   <body>
     <header class="site-header" data-header>
-      <a class="brand" href="#top" aria-label="Kamil Hortík — nahoru"><span class="brand-mark">KH</span><span>Kamil Hortík</span></a>
-      <nav aria-label="Hlavní navigace">
+      <a class="brand" href="#top" aria-label="Kamil Hortík — nahoru" data-cs-label="Kamil Hortík — nahoru" data-en-label="Kamil Hortík — home"><span class="brand-mark">KH</span><span>Kamil Hortík</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" data-cs-label="Menu" data-en-label="Menu"><span></span></button>
+      <nav id="primary-nav" aria-label="Hlavní navigace" data-cs-label="Hlavní navigace" data-en-label="Main navigation">
         <a href="#work" data-cs="Práce" data-en="Work">Práce</a>
         <a href="#about" data-cs="O mně" data-en="About">O mně</a>
         <a href="#contact" data-cs="Kontakt" data-en="Contact">Kontakt</a>
       </nav>
-      <div class="language" aria-label="Jazyk">
+      <div class="language" aria-label="Jazyk" data-cs-label="Jazyk" data-en-label="Language">
         <button class="lang is-active" data-lang="cs" aria-pressed="true">CZ</button>
         <button class="lang" data-lang="en" aria-pressed="false">EN</button>
       </div>
@@ -55,10 +56,10 @@
               <div class="project-heading"><span class="project-index mono">01</span><h3>Lasero</h3><p data-cs="AI pracovní prostor pro laserové gravírování. Produkt, AI workflow i uživatelské rozhraní." data-en="An AI workspace for laser engraving. Product, AI workflow and interface.">AI pracovní prostor pro laserové gravírování. Produkt, AI workflow i uživatelské rozhraní.</p></div>
               <div class="project-meta mono"><span>product / AI</span><span>2026</span></div>
             </div>
-            <button class="project-media project-trigger" type="button" data-title="Lasero" data-full="assets/lasero-full.png" data-link="https://lasero.net" aria-label="Otevřít projekt Lasero" aria-expanded="false">
-              <img src="assets/lasero.png" alt="Landing page projektu Lasero" loading="lazy" />
+            <button class="project-media project-trigger" type="button" data-title="Lasero" data-full="assets/lasero-full.png" data-link="https://lasero.net" aria-label="Otevřít projekt Lasero" data-cs-label="Otevřít projekt Lasero" data-en-label="Open project Lasero" aria-expanded="false">
+              <img src="assets/lasero.png" alt="Landing page projektu Lasero" data-cs-alt="Landing page projektu Lasero" data-en-alt="Lasero project landing page" loading="lazy" />
             </button>
-            <div class="project-media-footer"><span class="project-open mono" data-cs="otevřít projekt ↗" data-en="open project ↗">otevřít projekt ↗</span><span class="project-media-note mono">preview / 01</span></div>
+            <div class="project-media-footer"><a class="project-open mono" href="https://lasero.net" target="_blank" rel="noreferrer" data-cs="otevřít projekt ↗" data-en="open project ↗">otevřít projekt ↗</a><span class="project-media-note mono">preview / 01</span></div>
           </article>
 
           <article class="project project--nacas" data-project="nacas">
@@ -66,10 +67,10 @@
               <div class="project-heading"><span class="project-index mono">02</span><h3>Načas</h3><p class="project-description" data-cs="Fakturace pro malé firmy v Česku a na Slovensku. Produktový design a kompletní responzivní aplikace." data-en="Invoicing for small businesses in Czechia and Slovakia. Product design and the complete responsive app.">Fakturace pro malé firmy v Česku a na Slovensku. Produktový design a kompletní responzivní aplikace.</p></div>
               <div class="project-meta mono"><span>product / finance</span><span>2026</span></div>
             </div>
-            <button class="project-media project-trigger" type="button" data-title="Načas" data-full="assets/nacas-full.png" data-link="https://nacas.pages.dev" aria-label="Otevřít projekt Načas" aria-expanded="false">
-              <img src="assets/nacas.png" alt="Landing page projektu Načas" loading="lazy" />
+            <button class="project-media project-trigger" type="button" data-title="Načas" data-full="assets/nacas-full.png" data-link="https://nacas.pages.dev" aria-label="Otevřít projekt Načas" data-cs-label="Otevřít projekt Načas" data-en-label="Open project Načas" aria-expanded="false">
+              <img src="assets/nacas.png" alt="Landing page projektu Načas" data-cs-alt="Landing page projektu Načas" data-en-alt="Načas project landing page" loading="lazy" />
             </button>
-            <div class="project-media-footer"><span class="project-open mono" data-cs="otevřít projekt ↗" data-en="open project ↗">otevřít projekt ↗</span><span class="project-media-note mono">preview / 02</span></div>
+            <div class="project-media-footer"><a class="project-open mono" href="https://nacas.pages.dev" target="_blank" rel="noreferrer" data-cs="otevřít projekt ↗" data-en="open project ↗">otevřít projekt ↗</a><span class="project-media-note mono">preview / 02</span></div>
           </article>
 
           <article class="project project--subsentry" data-project="subsentry">
@@ -77,10 +78,10 @@
               <div class="project-heading"><span class="project-index mono">03</span><h3>SubSentry</h3><p data-cs="Soukromý přehled opakovaných plateb bez připojení banky. Od prvního konceptu po funkční produkt." data-en="A private overview of recurring payments without a bank connection. From first concept to working product.">Soukromý přehled opakovaných plateb bez připojení banky. Od prvního konceptu po funkční produkt.</p></div>
               <div class="project-meta mono"><span>product / privacy</span><span>2026</span></div>
             </div>
-            <button class="project-media project-trigger" type="button" data-title="SubSentry" data-full="assets/subsentry-full.png" data-link="https://subsentry.pages.dev" aria-label="Otevřít projekt SubSentry" aria-expanded="false">
-              <img src="assets/subsentry.png" alt="Landing page projektu SubSentry" loading="lazy" />
+            <button class="project-media project-trigger" type="button" data-title="SubSentry" data-full="assets/subsentry-full.png" data-link="https://subsentry.pages.dev" aria-label="Otevřít projekt SubSentry" data-cs-label="Otevřít projekt SubSentry" data-en-label="Open project SubSentry" aria-expanded="false">
+              <img src="assets/subsentry.png" alt="Landing page projektu SubSentry" data-cs-alt="Landing page projektu SubSentry" data-en-alt="SubSentry project landing page" loading="lazy" />
             </button>
-            <div class="project-media-footer"><span class="project-open mono" data-cs="otevřít projekt ↗" data-en="open project ↗">otevřít projekt ↗</span><span class="project-media-note mono">preview / 03</span></div>
+            <div class="project-media-footer"><a class="project-open mono" href="https://subsentry.pages.dev" target="_blank" rel="noreferrer" data-cs="otevřít projekt ↗" data-en="open project ↗">otevřít projekt ↗</a><span class="project-media-note mono">preview / 03</span></div>
           </article>
         </div>
       </section>
@@ -98,9 +99,9 @@
       <div class="contact-bottom mono"><span>© 2026 Kamil Hortík</span><a href="#top">↑ <span data-cs="zpět nahoru" data-en="back to top">zpět nahoru</span></a></div>
     </footer>
     <dialog class="project-dialog" aria-labelledby="dialog-title">
-      <div class="dialog-top mono"><span>PROJECT VIEW</span><button type="button" class="dialog-close" aria-label="Zavřít projekt">zavřít ×</button></div>
+      <div class="dialog-top mono"><span data-cs="Náhled projektu" data-en="Project view">Náhled projektu</span><button type="button" class="dialog-close" aria-label="Zavřít projekt" data-cs-label="Zavřít projekt" data-en-label="Close project" data-cs="zavřít ×" data-en="close ×">zavřít ×</button></div>
       <div class="dialog-image-wrap"><img class="dialog-image" src="" alt="" /></div>
-      <div class="dialog-bottom"><h2 id="dialog-title"></h2><a class="dialog-link mono" href="" target="_blank" rel="noreferrer">navštívit produkt ↗</a></div>
+      <div class="dialog-bottom"><h2 id="dialog-title"></h2><a class="dialog-link mono" href="" target="_blank" rel="noreferrer" data-cs="navštívit produkt ↗" data-en="visit product ↗">navštívit produkt ↗</a></div>
     </dialog>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
