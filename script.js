@@ -27,11 +27,11 @@ const initScrollMotion=()=>{
     if(nextIndex===currentIndex)return;
     const targetY=sceneTop(scenes[nextIndex]);
     const distance=Math.abs(targetY-window.scrollY);
-    const duration=Math.min(2.35,Math.max(1.7,distance/650));
+    const duration=Math.min(3.1,Math.max(2.3,distance/540));
     isNavigating=true;
     document.documentElement.classList.add('is-scrolling');
     gsap.killTweensOf(window);
-    gsap.to(window,{duration,scrollTo:{y:targetY,autoKill:false},ease:'power4.inOut',overwrite:true,onComplete:()=>{isNavigating=false;document.documentElement.classList.remove('is-scrolling')},onInterrupt:()=>{isNavigating=false;document.documentElement.classList.remove('is-scrolling')}});
+    gsap.to(window,{duration,scrollTo:{y:targetY,autoKill:false},ease:'expo.inOut',overwrite:true,onComplete:()=>{isNavigating=false;document.documentElement.classList.remove('is-scrolling')},onInterrupt:()=>{isNavigating=false;document.documentElement.classList.remove('is-scrolling')}});
   };
   const handleWheel=event=>{
     if(event.ctrlKey)return;
