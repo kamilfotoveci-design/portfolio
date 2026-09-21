@@ -1,69 +1,102 @@
 <!doctype html>
 <html lang="cs">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Nezávislý AI produktový tvůrce — strategie, design a vývoj.">
-  <meta name="theme-color" content="#f3f1e9">
-  <title>Kamil Hortík — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111310'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-size='23' font-weight='700' fill='%236f7d68'%3EKH%3C/text%3E%3C/svg%3E">
-</head>
-<body class="loading">
-  <div class="loader" aria-hidden="true"><span>KH</span><i></i></div>
-  <div class="scroll-progress" aria-hidden="true"></div>
-  <div class="cursor" aria-hidden="true"><span data-i18n="cursorView">Otevřít</span></div>
-
-  <header class="site-header" id="header">
-    <nav class="nav shell" aria-label="Hlavní navigace" data-i18n-aria="navAria">
-      <a class="brand magnetic" href="#top" aria-label="Kamil Hortík — nahoru" data-i18n-aria="topAria"><span>KH</span><strong>Kamil Hortík Portfolio</strong></a>
-      <div class="nav-right">
-        <a href="#work" data-i18n="navWork">Projekty</a>
-        <a href="#contact" data-i18n="navContact">Kontakt</a>
-        <div class="languages" role="group" aria-label="Jazyk" data-i18n-aria="languageAria">
-          <span class="lang-thumb"></span>
-          <button type="button" data-lang="cs" aria-pressed="true">CZ</button>
-          <button type="button" data-lang="en" aria-pressed="false">EN</button>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Kamil Hortík — AI Product Designer & Builder. Strategie, UI a kód." />
+    <title>Kamil Hortík — Product Designer & Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="Kamil Hortík — nahoru"><span class="brand-mark">KH</span><span>Kamil Hortík</span></a>
+      <nav aria-label="Hlavní navigace">
+        <a href="#work" data-cs="Práce" data-en="Work">Práce</a>
+        <a href="#about" data-cs="O mně" data-en="About">O mně</a>
+        <a href="#contact" data-cs="Kontakt" data-en="Contact">Kontakt</a>
+      </nav>
+      <div class="language" aria-label="Jazyk">
+        <button class="lang is-active" data-lang="cs" aria-pressed="true">CZ</button>
+        <button class="lang" data-lang="en" aria-pressed="false">EN</button>
       </div>
-    </nav>
-  </header>
+    </header>
 
-  <main id="top">
-    <section class="hero shell snap-panel" aria-labelledby="hero-title">
-      <h1 id="hero-title" class="hero-title" aria-label="Kamil Hortík Portfolio">
-        <span class="title-line"><span data-i18n="heroLine1">KAMIL</span></span>
-        <span class="title-line title-line--shift"><span><b data-i18n="heroLine2b">HORTÍK</b></span></span>
-        <span class="title-line title-line--portfolio"><span>PORTFOLIO</span></span>
-      </h1>
-      <p class="hero-role" data-i18n="heroRole">AI Product Designer &amp; Builder — strategie, UI a kód.</p>
-      <figure class="hero-portrait" aria-hidden="true"><img src="assets/profile.png" alt="" width="1296" height="1214" fetchpriority="high"></figure>
-    </section>
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-meta mono"><span>01—03</span><span data-cs="Vybraná práce" data-en="Selected work">Vybraná práce</span></div>
+        <div class="hero-copy">
+          <p class="eyebrow mono" data-cs="AI produktový design / vývoj" data-en="AI product design / development">AI produktový design / vývoj</p>
+          <h1 id="hero-title">Kamil<br /><em>Hortík</em></h1>
+          <p class="hero-note" data-cs="Navrhuji a stavím digitální produkty od prvního systému po poslední detail." data-en="I design and build digital products from the first system to the last detail.">Navrhuji a stavím digitální produkty od prvního systému po poslední detail.</p>
+        </div>
+        <figure class="hero-portrait">
+          <img src="assets/profile.png" alt="Kamil Hortík" />
+          <figcaption class="mono"><span>portrait / 2026</span><span>↘ scroll to enter</span></figcaption>
+        </figure>
+        <div class="hero-rule" aria-hidden="true"></div>
+      </section>
 
-    <section class="work" id="work" aria-label="Projects">
-      <article class="project shell snap-panel" data-project="01">
-        <div class="project-copy reveal"><h2>Lasero</h2><p data-i18n="laseroDesc">AI pracovní prostor pro laserové gravírování. Navrhl a postavil jsem produkt, AI workflow i uživatelské rozhraní.</p></div>
-        <a class="project-visual cursor-target reveal" id="lasero-preview" href="https://lasero.net" target="_blank" rel="noopener" aria-label="Otevřít Lasero" data-i18n-aria="openLasero"><div class="image-wrap"><img src="assets/lasero.png" alt="Landing page projektu Lasero" data-i18n-alt="laseroAlt" width="1440" height="1000" loading="lazy"></div></a>
-      </article>
+      <section id="work" class="work" aria-labelledby="work-title">
+        <div class="section-intro">
+          <p class="eyebrow mono">02 / <span data-cs="Práce" data-en="Work">Práce</span></p>
+          <h2 id="work-title" data-cs="Tři produkty. Od strategie po kód." data-en="Three products. From strategy to code.">Tři produkty.<br /><span>Od strategie po kód.</span></h2>
+          <p class="section-lede" data-cs="Ne portfolio dekorací. Pracovní stůl s věcmi, které jsem opravdu navrhl a postavil." data-en="Not a portfolio of decorations. A working table of things I actually designed and built.">Ne portfolio dekorací. Pracovní stůl s věcmi, které jsem opravdu navrhl a postavil.</p>
+        </div>
 
-      <article class="project shell snap-panel" data-project="02">
-        <div class="project-copy reveal"><h2>Načas</h2><p data-i18n="nacasDesc">Fakturace pro malé firmy v Česku a na Slovensku. Vytvořil jsem produktový design a kompletní responzivní aplikaci.</p></div>
-        <a class="project-visual cursor-target reveal" href="https://nacas.pages.dev" target="_blank" rel="noopener" aria-label="Otevřít Načas" data-i18n-aria="openNacas"><div class="image-wrap"><img src="assets/nacas.png" alt="Landing page projektu Načas" data-i18n-alt="nacasAlt" width="1440" height="1000" loading="lazy"></div></a>
-      </article>
+        <div class="project-list">
+          <article class="project project--lasero" data-project="lasero">
+            <a class="project-media" href="https://lasero.net" target="_blank" rel="noreferrer" aria-label="Otevřít Lasero">
+              <span class="project-index mono">01</span>
+              <img src="assets/lasero.png" alt="Landing page projektu Lasero" loading="lazy" />
+              <span class="project-open mono" data-cs="otevřít ↗" data-en="open ↗">otevřít ↗</span>
+            </a>
+            <div class="project-info">
+              <div><h3>Lasero</h3><p data-cs="AI pracovní prostor pro laserové gravírování. Produkt, AI workflow i uživatelské rozhraní." data-en="An AI workspace for laser engraving. Product, AI workflow and interface.">AI pracovní prostor pro laserové gravírování. Produkt, AI workflow i uživatelské rozhraní.</p></div>
+              <div class="project-meta mono"><span>product / AI</span><span>2026</span></div>
+            </div>
+          </article>
 
-      <article class="project shell snap-panel" data-project="03">
-        <div class="project-copy reveal"><h2>SubSentry</h2><p data-i18n="subsentryDesc">Soukromý přehled opakovaných plateb bez připojení banky. Navrhl jsem ho od prvního konceptu po funkční produkt.</p></div>
-        <a class="project-visual cursor-target reveal" href="https://subsentry.pages.dev" target="_blank" rel="noopener" aria-label="Otevřít SubSentry" data-i18n-aria="openSubsentry"><div class="image-wrap"><img src="assets/subsentry.png" alt="Landing page projektu SubSentry" data-i18n-alt="subsentryAlt" width="1440" height="1000" loading="lazy"></div></a>
-      </article>
-    </section>
+          <article class="project project--nacas" data-project="nacas">
+            <div class="project-info project-info--top">
+              <div><span class="project-index mono">02</span><h3>Načas</h3></div>
+              <div class="project-meta mono"><span>product / finance</span><span>2026</span></div>
+            </div>
+            <a class="project-media" href="https://nacas.pages.dev" target="_blank" rel="noreferrer" aria-label="Otevřít Načas">
+              <img src="assets/nacas.png" alt="Landing page projektu Načas" loading="lazy" />
+              <span class="project-open mono" data-cs="otevřít ↗" data-en="open ↗">otevřít ↗</span>
+            </a>
+            <p class="project-caption" data-cs="Fakturace pro malé firmy v Česku a na Slovensku. Produktový design a kompletní responzivní aplikace." data-en="Invoicing for small businesses in Czechia and Slovakia. Product design and the complete responsive app.">Fakturace pro malé firmy v Česku a na Slovensku. Produktový design a kompletní responzivní aplikace.</p>
+          </article>
 
-  </main>
+          <article class="project project--subsentry" data-project="subsentry">
+            <a class="project-media" href="https://subsentry.pages.dev" target="_blank" rel="noreferrer" aria-label="Otevřít SubSentry">
+              <span class="project-index mono">03</span>
+              <img src="assets/subsentry.png" alt="Landing page projektu SubSentry" loading="lazy" />
+              <span class="project-open mono" data-cs="otevřít ↗" data-en="open ↗">otevřít ↗</span>
+            </a>
+            <div class="project-info">
+              <div><h3>SubSentry</h3><p data-cs="Soukromý přehled opakovaných plateb bez připojení banky. Od prvního konceptu po funkční produkt." data-en="A private overview of recurring payments without a bank connection. From first concept to working product.">Soukromý přehled opakovaných plateb bez připojení banky. Od prvního konceptu po funkční produkt.</p></div>
+              <div class="project-meta mono"><span>product / privacy</span><span>2026</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
 
-  <footer id="contact" class="snap-panel"><div class="contact shell"><div class="contact-main reveal"><h2><a class="magnetic contact-link" href="mailto:hello@lasero.net"><span data-i18n="contactTitle">Napište mi.</span></a></h2></div></div></footer>
+      <section id="about" class="about" aria-labelledby="about-title">
+        <p class="eyebrow mono">03 / <span data-cs="O mně" data-en="About">O mně</span></p>
+        <div class="about-grid"><h2 id="about-title" data-cs="Méně prezentace.<br />Více stavění." data-en="Less presentation.<br />More building.">Méně prezentace.<br /><span>Více stavění.</span></h2><div><p class="about-lede" data-cs="AI Product Designer & Builder — strategie, UI a kód." data-en="AI Product Designer & Builder — strategy, UI and code.">AI Product Designer & Builder — strategie, UI a kód.</p><p data-cs="Pracuji napříč produktem: od pojmenování problému přes strukturu a rozhraní až po funkční řešení. Tyhle tři produkty jsou zatím nejpřesnější záznam toho, jak přemýšlím a pracuji." data-en="I work across the product: from naming the problem through structure and interface to a working solution. These three products are the clearest record of how I think and work.">Pracuji napříč produktem: od pojmenování problému přes strukturu a rozhraní až po funkční řešení. Tyhle tři produkty jsou zatím nejpřesnější záznam toho, jak přemýšlím a pracuji.</p></div></div>
+      </section>
+    </main>
 
-  <script src="script.js"></script>
-</body>
+    <footer id="contact" class="contact">
+      <div class="contact-top mono"><span>04 / <span data-cs="Kontakt" data-en="Contact">Kontakt</span></span><span>↘</span></div>
+      <h2 data-cs="Napište mi." data-en="Write to me.">Napište mi.</h2>
+      <a class="contact-link" href="mailto:hello@lasero.net">hello@lasero.net <span>↗</span></a>
+      <div class="contact-bottom mono"><span>© 2026 Kamil Hortík</span><a href="#top">↑ <span data-cs="zpět nahoru" data-en="back to top">zpět nahoru</span></a></div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
 </html>
