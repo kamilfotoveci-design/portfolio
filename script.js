@@ -32,6 +32,12 @@ const initScrollMotion=()=>{
     }
     ScrollTrigger.create({trigger:project,start:'top 62%',end:'bottom 38%',onEnter:()=>project.classList.add('is-active'),onEnterBack:()=>project.classList.add('is-active'),onLeave:()=>project.classList.remove('is-active'),onLeaveBack:()=>project.classList.remove('is-active')});
   });
+  gsap.utils.toArray('.project-media-footer,.about-grid,.contact-link').forEach(element=>{
+    gsap.fromTo(element,{y:26,opacity:.5},{y:0,opacity:1,ease:'none',scrollTrigger:{trigger:element,start:'top 88%',end:'top 58%',scrub:.55,invalidateOnRefresh:true}});
+  });
+  gsap.utils.toArray('.project,.about,.contact').forEach(scene=>{
+    gsap.fromTo(scene,{clipPath:'inset(4% 0 4%)'},{clipPath:'inset(0% 0 0%)',ease:'none',scrollTrigger:{trigger:scene,start:'top bottom',end:'top 48%',scrub:.7,invalidateOnRefresh:true}});
+  });
   const scenes=gsap.utils.toArray('.hero,.project,.about,.contact');
   let isNavigating=false;
   let wheelIntent=0;

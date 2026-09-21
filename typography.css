@@ -15,6 +15,11 @@ html.gsap-ready {
   overscroll-behavior-y: none;
 }
 
+html,
+body {
+  overflow-x: clip;
+}
+
 :root {
   --font-display: "Bricolage Grotesque", sans-serif;
   --font-body: "Source Sans 3", sans-serif;
@@ -209,7 +214,33 @@ h1 em {
 }
 
 .project-open {
-  top: 1rem;
+  position: static;
+  z-index: auto;
+  color: var(--ink);
+  text-shadow: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.25rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.project-media-footer {
+  width: min(100%, 980px);
+  margin: 0.7rem auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 1.5rem;
+  color: var(--muted);
+}
+
+.project-media-footer .project-open:hover,
+.project-media-footer .project-open:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.project-media-note {
+  color: var(--muted);
 }
 
 .project--nacas .project-info h3 {
@@ -229,11 +260,16 @@ h1 em {
 }
 
 .project.is-active .project-media::after {
-  opacity: 0.12;
+  opacity: 0;
 }
 
 .project.is-active .project-open {
-  color: var(--paper);
+  color: var(--ink);
+}
+
+.project-media::after,
+.project-media:hover::after {
+  opacity: 0;
 }
 
 .about-lede {
@@ -296,6 +332,11 @@ h1 em {
     width: 100%;
     aspect-ratio: 1.18;
     border-radius: 0.85rem;
+  }
+
+  .project-media-footer {
+    width: 100%;
+    margin-top: 0.55rem;
   }
 
   .hero-note {
