@@ -10,6 +10,11 @@ html {
   }
 }
 
+html.gsap-ready {
+  scroll-snap-type: none;
+  overscroll-behavior-y: none;
+}
+
 :root {
   --font-display: "Bricolage Grotesque", sans-serif;
   --font-body: "Source Sans 3", sans-serif;
@@ -170,6 +175,16 @@ h1 em {
   object-fit: contain;
   object-position: center;
   background: #f1f0ea;
+}
+
+.hero-portrait {
+  background: transparent;
+}
+
+.hero-portrait img {
+  object-fit: contain;
+  object-position: center bottom;
+  filter: none;
 }
 
 .project {

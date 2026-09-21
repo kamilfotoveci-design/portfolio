@@ -32,26 +32,61 @@ const initScrollMotion=()=>{
     }
     ScrollTrigger.create({trigger:project,start:'top 62%',end:'bottom 38%',onEnter:()=>project.classList.add('is-active'),onEnterBack:()=>project.classList.add('is-active'),onLeave:()=>project.classList.remove('is-active'),onLeaveBack:()=>project.classList.remove('is-active')});
   });
-  const projects=gsap.utils.toArray('.project');
-  let settleTimer;
-  let settleTween;
-  const settleOnProject=()=>{
-    if(settleTween?.isActive())return;
-    const currentY=window.scrollY;
-    const target=projects.reduce((closest,project)=>{
-      const top=project.getBoundingClientRect().top+window.scrollY;
-      return Math.abs(top-currentY)<Math.abs(closest-currentY)?top:closest;
-    },projects[0]?.getBoundingClientRect().top+window.scrollY||0);
-    if(Math.abs(target-currentY)<10)return;
-    settleTween=gsap.to(window,{duration:.82,scrollTo:{y:target,autoKill:true},ease:'power3.out',overwrite:'auto',onComplete:()=>{settleTween=null},onInterrupt:()=>{settleTween=null}});
+  const scenes=gsap.utils.toArray('.hero,.project,.about,.contact');
+  let isNavigating=false;
+  let wheelIntent=0;
+  let touchStartY=null;
+  let lastScrollY=window.scrollY;
+  let scrollSettleTimer;
+  const sceneTop=scene=>scene.getBoundingClientRect().top+window.scrollY;
+  const nearestSceneIndex=()=>scenes.reduce((closest,scene,index)=>Math.abs(sceneTop(scene)-window.scrollY)<Math.abs(sceneTop(scenes[closest])-window.scrollY)?index:closest,0);
+  const navigateScene=direction=>{
+    if(isNavigating)return;
+    const currentIndex=nearestSceneIndex();
+    const nextIndex=Math.min(scenes.length-1,Math.max(0,currentIndex+direction));
+    if(nextIndex===currentIndex)return;
+    isNavigating=true;
+    gsap.to(window,{duration:.92,scrollTo:{y:sceneTop(scenes[nextIndex]),autoKill:false},ease:'expo.inOut',overwrite:'auto',onComplete:()=>{isNavigating=false},onInterrupt:()=>{isNavigating=false}});
   };
-  const queueProjectSettle=()=>{
-    clearTimeout(settleTimer);
-    settleTimer=setTimeout(settleOnProject,150);
+  const handleWheel=event=>{
+    event.preventDefault();
+    if(isNavigating)return;
+    wheelIntent+=event.deltaY;
+    if(Math.abs(wheelIntent)<8)return;
+    const direction=wheelIntent>0?1:-1;
+    wheelIntent=0;
+    navigateScene(direction);
   };
-  window.addEventListener('scroll',queueProjectSettle,{passive:true});
-  window.addEventListener('wheel',queueProjectSettle,{passive:true});
-  window.addEventListener('touchend',queueProjectSettle,{passive:true});
+  const handleKeydown=event=>{
+    if(isNavigating||event.target.closest('input,textarea,select,dialog'))return;
+    const next=['ArrowDown','PageDown',' '].includes(event.key);
+    const previous=['ArrowUp','PageUp'].includes(event.key);
+    if(!next&&!previous)return;
+    event.preventDefault();
+    navigateScene(next?1:-1);
+  };
+  const handleTouchStart=event=>{touchStartY=event.touches[0]?.clientY??null};
+  const handleTouchMove=event=>{if(touchStartY!==null)event.preventDefault()};
+  const handleTouchEnd=event=>{
+    if(touchStartY===null)return;
+    const endY=event.changedTouches[0]?.clientY??touchStartY;
+    const delta=touchStartY-endY;
+    touchStartY=null;
+    if(Math.abs(delta)>24)navigateScene(delta>0?1:-1);
+  };
+  const handleScrollbarSettle=()=>{
+    const direction=window.scrollY>=lastScrollY?1:-1;
+    lastScrollY=window.scrollY;
+    if(isNavigating)return;
+    clearTimeout(scrollSettleTimer);
+    scrollSettleTimer=setTimeout(()=>navigateScene(direction),160);
+  };
+  window.addEventListener('wheel',handleWheel,{passive:false});
+  window.addEventListener('keydown',handleKeydown);
+  window.addEventListener('scroll',handleScrollbarSettle,{passive:true});
+  window.addEventListener('touchstart',handleTouchStart,{passive:true});
+  window.addEventListener('touchmove',handleTouchMove,{passive:false});
+  window.addEventListener('touchend',handleTouchEnd,{passive:true});
   gsap.fromTo('.section-intro',{y:34,opacity:.45},{y:0,opacity:1,ease:motionEase,duration:.8,scrollTrigger:{trigger:'.section-intro',start:'top 82%',toggleActions:'play none none reverse'}});
   ScrollTrigger.refresh();
 };
