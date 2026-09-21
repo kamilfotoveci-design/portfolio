@@ -1,6 +1,11 @@
 /* Typography direction: expressive grotesk display + calm editorial body. */
 html {
   scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+html.gsap-ready {
+  scroll-snap-type: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -114,6 +119,8 @@ h1 em {
   padding: 0 0 1rem;
   border-top: 0;
   border-bottom: 1px solid var(--line);
+  width: min(100%, 980px);
+  margin-inline: auto;
 }
 
 .project-heading {
@@ -153,12 +160,41 @@ h1 em {
 
 .project-media {
   order: 2;
+  width: min(100%, 980px);
+  margin-inline: auto;
+  aspect-ratio: 1.7;
+  border: 1px solid rgba(17, 18, 15, 0.1);
+  border-radius: 1.15rem;
+  background: var(--paper);
+  box-shadow: 0 18px 50px rgba(17, 18, 15, 0.08);
+  overflow: clip;
 }
 
 .project-media img {
   object-fit: contain;
   object-position: center;
-  background: #d6d5ce;
+  background: #f1f0ea;
+}
+
+.project {
+  min-height: 100svh;
+  padding-inline: clamp(18px, 8vw, 140px);
+  overflow: clip;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.project--nacas .project-media {
+  width: min(100%, 900px);
+  aspect-ratio: 1.62;
+}
+
+.project--nacas .project-info {
+  width: min(100%, 900px);
+}
+
+.project--subsentry .project-media {
+  width: min(100%, 980px);
 }
 
 .project-open {
@@ -238,6 +274,17 @@ h1 em {
   .project-meta {
     justify-content: space-between;
     padding-top: 1rem;
+  }
+
+  .project {
+    padding-inline: 18px;
+  }
+
+  .project-media,
+  .project--nacas .project-media {
+    width: 100%;
+    aspect-ratio: 1.18;
+    border-radius: 0.85rem;
   }
 
   .hero-note {

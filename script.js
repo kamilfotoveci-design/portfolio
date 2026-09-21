@@ -13,6 +13,7 @@ const footerObserver=new IntersectionObserver(([entry])=>header.classList.toggle
 const initScrollMotion=()=>{
   if(reduceMotion||!window.gsap||!window.ScrollTrigger)return;
   gsap.registerPlugin(ScrollTrigger);
+  document.documentElement.classList.add('gsap-ready');
   const motionEase='power2.out';
   const hero=document.querySelector('.hero');
   if(hero){
@@ -31,6 +32,27 @@ const initScrollMotion=()=>{
     }
     ScrollTrigger.create({trigger:project,start:'top 62%',end:'bottom 38%',onEnter:()=>project.classList.add('is-active'),onEnterBack:()=>project.classList.add('is-active'),onLeave:()=>project.classList.remove('is-active'),onLeaveBack:()=>project.classList.remove('is-active')});
   });
+  const projectList=document.querySelector('.project-list');
+  if(projectList){
+    const projects=gsap.utils.toArray('.project');
+    ScrollTrigger.create({
+      trigger:projectList,
+      start:'top top',
+      end:'bottom bottom',
+      invalidateOnRefresh:true,
+      snap:{
+        snapTo:value=>{
+          const maxTravel=Math.max(1,projectList.offsetHeight-window.innerHeight);
+          const points=projects.map(project=>Math.min(1,Math.max(0,(project.offsetTop)/maxTravel)));
+          return points.reduce((closest,point)=>Math.abs(point-value)<Math.abs(closest-value)?point:closest,points[0]||0);
+        },
+        duration:{min:.28,max:.9},
+        delay:.08,
+        ease:'power3.out',
+        directional:true
+      }
+    });
+  }
   gsap.fromTo('.section-intro',{y:34,opacity:.45},{y:0,opacity:1,ease:motionEase,duration:.8,scrollTrigger:{trigger:'.section-intro',start:'top 82%',toggleActions:'play none none reverse'}});
   ScrollTrigger.refresh();
 };
