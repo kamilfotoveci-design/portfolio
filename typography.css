@@ -81,6 +81,21 @@ h1 {
   text-transform: uppercase;
 }
 
+.line-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.line {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line-mask {
+    overflow: visible;
+  }
+}
+
 h1 em {
   font-style: normal;
   font-weight: 420;
