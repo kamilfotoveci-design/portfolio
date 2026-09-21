@@ -89,7 +89,6 @@ h1 em {
 .hero-note,
 .section-lede,
 .project-info p,
-.project-caption,
 .about-grid > div > p:last-child {
   font-family: var(--font-body);
   font-size: var(--text-body);
