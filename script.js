@@ -51,10 +51,16 @@ const initScrollMotion=()=>{
     const currentIndex=nearestSceneIndex();
     const nextIndex=Math.min(scenes.length-1,Math.max(0,currentIndex+direction));
     if(nextIndex===currentIndex)return;
+    const targetY=sceneTop(scenes[nextIndex]);
+    const distance=Math.abs(targetY-window.scrollY);
+    const duration=Math.min(1.65,Math.max(1.15,distance/900));
     isNavigating=true;
-    gsap.to(window,{duration:.92,scrollTo:{y:sceneTop(scenes[nextIndex]),autoKill:false},ease:'expo.inOut',overwrite:'auto',onComplete:()=>{isNavigating=false},onInterrupt:()=>{isNavigating=false}});
+    document.documentElement.classList.add('is-scrolling');
+    gsap.killTweensOf(window);
+    gsap.to(window,{duration,scrollTo:{y:targetY,autoKill:false},ease:'power4.inOut',overwrite:true,onComplete:()=>{isNavigating=false;document.documentElement.classList.remove('is-scrolling')},onInterrupt:()=>{isNavigating=false;document.documentElement.classList.remove('is-scrolling')}});
   };
   const handleWheel=event=>{
+    if(event.ctrlKey)return;
     event.preventDefault();
     if(isNavigating)return;
     wheelIntent+=event.deltaY;
