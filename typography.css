@@ -180,6 +180,12 @@ h1 em {
   object-fit: contain;
   object-position: center;
   background: #f1f0ea;
+  transition: filter 0.7s ease;
+}
+
+.project-media:hover img {
+  transform: none;
+  filter: none;
 }
 
 .hero-portrait {

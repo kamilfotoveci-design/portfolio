@@ -26,7 +26,7 @@ const initScrollMotion=()=>{
     const media=project.querySelector('.project-media');
     const info=project.querySelector('.project-info,.project-info--top');
     if(!media)return;
-    gsap.fromTo(media,{scale:.965,y:28},{scale:1.015,y:-16,ease:'none',scrollTrigger:{trigger:project,start:'top bottom',end:'bottom top',scrub:.7,invalidateOnRefresh:true}});
+    gsap.fromTo(media,{y:20},{y:-12,ease:'none',scrollTrigger:{trigger:project,start:'top bottom',end:'bottom top',scrub:1.05,invalidateOnRefresh:true}});
     if(info){
       gsap.fromTo(info,{y:18,opacity:.62},{y:-10,opacity:1,ease:'none',scrollTrigger:{trigger:project,start:'top 82%',end:'center center',scrub:.55,invalidateOnRefresh:true}});
     }
@@ -53,7 +53,7 @@ const initScrollMotion=()=>{
     if(nextIndex===currentIndex)return;
     const targetY=sceneTop(scenes[nextIndex]);
     const distance=Math.abs(targetY-window.scrollY);
-    const duration=Math.min(1.65,Math.max(1.15,distance/900));
+    const duration=Math.min(2.35,Math.max(1.7,distance/650));
     isNavigating=true;
     document.documentElement.classList.add('is-scrolling');
     gsap.killTweensOf(window);
