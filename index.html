@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="polish.css?v=3" />
     <link rel="stylesheet" href="layout-fixes.css?v=1" />
     <link rel="stylesheet" href="typography.css?v=1" />
+    <link rel="stylesheet" href="react-system.css?v=2" />
   </head>
   <body>
     <header class="site-header" data-header>
@@ -20,6 +21,7 @@
       <nav id="primary-nav" aria-label="Hlavní navigace" data-cs-label="Hlavní navigace" data-en-label="Main navigation">
         <a href="#work" data-cs="Práce" data-en="Work">Práce</a>
         <a href="#about" data-cs="O mně" data-en="About">O mně</a>
+        <a href="archive.html" data-cs="Archiv" data-en="Archive">Archiv</a>
         <a href="#contact" data-cs="Kontakt" data-en="Contact">Kontakt</a>
       </nav>
       <div class="language" aria-label="Jazyk" data-cs-label="Jazyk" data-en-label="Language">
@@ -32,7 +34,7 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-meta mono"><span>01—03</span><span data-cs="Vybraná práce" data-en="Selected work">Vybraná práce</span></div>
         <div class="hero-copy">
-          <p class="eyebrow mono" data-cs="AI produktový design / vývoj" data-en="AI product design / development">AI produktový design / vývoj</p>
+          <p class="eyebrow mono"><span data-cs="Navrhuji" data-en="I design">Navrhuji</span> <span id="role-reel">produktové systémy</span></p>
           <h1 id="hero-title"><span class="line-mask"><span class="line">Kamil</span></span><span class="line-mask"><span class="line"><em>Hortík</em></span></span></h1>
           <p class="hero-note" data-cs="Navrhuji a stavím digitální produkty od prvního systému po poslední detail." data-en="I design and build digital products from the first system to the last detail.">Navrhuji a stavím digitální produkty od prvního systému po poslední detail.</p>
         </div>
@@ -50,7 +52,8 @@
           <p class="section-lede" data-cs="Ne portfolio dekorací. Pracovní stůl s věcmi, které jsem opravdu navrhl a postavil." data-en="Not a portfolio of decorations. A working table of things I actually designed and built.">Ne portfolio dekorací. Pracovní stůl s věcmi, které jsem opravdu navrhl a postavil.</p>
         </div>
 
-        <div class="project-list">
+        <div id="project-explorer" aria-live="polite"></div>
+        <div class="project-list" aria-label="Fallback project list">
           <article class="project project--lasero" data-project="lasero">
             <div class="project-info">
               <div class="project-heading"><span class="project-index mono">01</span><h3>Lasero</h3><p data-cs="AI pracovní prostor pro laserové gravírování. Produkt, AI workflow i uživatelské rozhraní." data-en="An AI workspace for laser engraving. Product, AI workflow and interface.">AI pracovní prostor pro laserové gravírování. Produkt, AI workflow i uživatelské rozhraní.</p></div>
@@ -110,5 +113,6 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
     <script src="script.js"></script>
+    <script type="module" src="assets/app.js?v=2"></script>
   </body>
 </html>

@@ -331,7 +331,7 @@ h1 em {
 
 @media (max-width: 760px) {
   h1 {
-    font-size: clamp(4.75rem, 21vw, 9.4rem);
+    font-size: clamp(4.45rem, 19vw, 8.8rem);
     line-height: 0.82;
   }
 
