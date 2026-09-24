@@ -17,7 +17,10 @@ const projects = [
     en: "An AI workspace for laser engraving — from workflow to a working interface.",
     problem: "Složitý postup od nápadu po výrobní soubor byl rozdělený mezi několik nesourodých nástrojů.",
     role: "Produktová strategie, UX systém, vizuální design a front-end.",
-    result: "Jeden souvislý pracovní prostor, který vede uživatele od promptu až k exportu."
+    result: "Jeden souvislý pracovní prostor, který vede uživatele od promptu až k exportu.",
+    problemEn: "The workflow from initial idea to a production-ready file was split across several disconnected tools.",
+    roleEn: "Product strategy, UX system, visual design and front-end.",
+    resultEn: "A connected workspace guiding users from prompt to export."
   },
   {
     id: "nacas",
@@ -33,7 +36,10 @@ const projects = [
     en: "Invoicing for small businesses in Czechia and Slovakia without accounting clutter.",
     problem: "Běžné fakturační aplikace působí jako zmenšené účetní systémy a zpomalují jednoduchou práci.",
     role: "Produktový koncept, informační architektura, UI a responzivní implementace.",
-    result: "Klidný fakturační tok, který upřednostňuje vystavení a zaplacení před administrativou."
+    result: "Klidný fakturační tok, který upřednostňuje vystavení a zaplacení před administrativou.",
+    problemEn: "Typical invoicing apps feel like scaled-down accounting systems and slow down simple work.",
+    roleEn: "Product concept, information architecture, UI and responsive implementation.",
+    resultEn: "A calm invoicing flow that puts issuing and getting paid ahead of administration."
   },
   {
     id: "subsentry",
@@ -49,14 +55,25 @@ const projects = [
     en: "A private overview of recurring payments without connecting a bank account.",
     problem: "Přehled předplatných obvykle vyžaduje sdílení citlivých bankovních dat s další službou.",
     role: "Výzkum problému, produktový model, design systému a funkční prototyp.",
-    result: "Lokální přehled plateb, který dává kontrolu uživateli místo agregátoru dat."
+    result: "Lokální přehled plateb, který dává kontrolu uživateli místo agregátoru dat.",
+    problemEn: "A subscription overview often requires sharing sensitive banking data with another service.",
+    roleEn: "Problem research, product model, system design and a working prototype.",
+    resultEn: "A local payment overview that keeps control with the user instead of a data aggregator."
   }
 ];
 
 function useLanguage() {
-  const [lang, setLang] = useState(document.documentElement.lang === "en" ? "en" : "cs");
+  const [lang, setLang] = useState(() => {
+    try { return localStorage.getItem("portfolio-lang") === "en" ? "en" : "cs"; }
+    catch { return document.documentElement.lang === "en" ? "en" : "cs"; }
+  });
+  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   useEffect(() => {
-    const onLanguage = event => setLang(event.detail?.lang === "en" ? "en" : "cs");
+    const onLanguage = event => {
+      const nextLang = event.detail?.lang === "en" ? "en" : "cs";
+      document.documentElement.lang = nextLang;
+      setLang(nextLang);
+    };
     window.addEventListener("portfolio:language", onLanguage);
     return () => window.removeEventListener("portfolio:language", onLanguage);
   }, []);
@@ -126,12 +143,13 @@ function ProjectExplorer() {
 }
 
 function PixelCarousel({ project }) {
+  const lang = useLanguage();
   const slides = useMemo(() => [
-    { src: `../${project.cover}`, position: "center", label: "Overview" },
-    { src: `../${project.full}`, position: "top", label: "System" },
-    { src: `../${project.full}`, position: "center", label: "Flow" },
-    { src: `../${project.full}`, position: "bottom", label: "Detail" }
-  ], [project]);
+    { src: `../${project.cover}`, position: "center", label: lang === "en" ? "Overview" : "Přehled" },
+    { src: `../${project.full}`, position: "top", label: lang === "en" ? "Full-page top" : "Horní část stránky" },
+    { src: `../${project.full}`, position: "center", label: lang === "en" ? "Full-page middle" : "Střed stránky" },
+    { src: `../${project.full}`, position: "bottom", label: lang === "en" ? "Full-page bottom" : "Spodní část stránky" }
+  ], [project, lang]);
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
   const choose = next => { setDirection(next > active ? 1 : -1); setActive(next); };
@@ -149,51 +167,60 @@ function PixelCarousel({ project }) {
         <motion.div className="pixel-wipe" key={`wipe-${active}`} initial={{ scaleX: 1 }} animate={{ scaleX: 0 }} transition={{ duration: .62, ease: [.76, 0, .24, 1] }} />
       </div>
       <div className="carousel-control">
-        <button type="button" onClick={() => step(-1)} aria-label="Previous image">Prev</button>
-        <div className="carousel-dots" role="tablist">{slides.map((slide, index) => <button type="button" key={slide.label} className={index === active ? "is-active" : ""} onClick={() => choose(index)} aria-label={`Show ${slide.label}`} />)}</div>
+        <button type="button" onClick={() => step(-1)} aria-label={lang === "en" ? "Previous image" : "Předchozí obrázek"}>{lang === "en" ? "Prev" : "Zpět"}</button>
+        <div className="carousel-dots" role="tablist" aria-label={lang === "en" ? "Gallery images" : "Obrázky galerie"}>{slides.map((slide, index) => <button type="button" role="tab" key={slide.label} className={index === active ? "is-active" : ""} onClick={() => choose(index)} aria-selected={index === active} aria-label={`${lang === "en" ? "Show" : "Zobrazit"} ${slide.label}`} />)}</div>
         <span className="mono">{String(active + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}</span>
-        <button type="button" onClick={() => step(1)} aria-label="Next image">Next</button>
+        <button type="button" onClick={() => step(1)} aria-label={lang === "en" ? "Next image" : "Další obrázek"}>{lang === "en" ? "Next" : "Další"}</button>
       </div>
     </section>
   );
 }
 
 function CaseStudy({ id }) {
+  const lang = useLanguage();
   const project = projects.find(item => item.id === id) || projects[0];
+  const nextProject = projects[(projects.indexOf(project) + 1) % projects.length];
   return (
     <main className="case-page">
-      <a className="case-back mono" href="../index.html#work">Back to work</a>
+      <div className="case-topline">
+        <a className="case-back mono" href="../#work">{lang === "en" ? "Back to work" : "Zpět na projekty"}</a>
+        <div className="language" aria-label={lang === "en" ? "Language" : "Jazyk"}>
+          <button type="button" className={`lang ${lang === "cs" ? "is-active" : ""}`} aria-pressed={lang === "cs"} onClick={() => { localStorage.setItem("portfolio-lang", "cs"); window.dispatchEvent(new CustomEvent("portfolio:language", { detail: { lang: "cs" } })); }}>{"CZ"}</button>
+          <button type="button" className={`lang ${lang === "en" ? "is-active" : ""}`} aria-pressed={lang === "en"} onClick={() => { localStorage.setItem("portfolio-lang", "en"); window.dispatchEvent(new CustomEvent("portfolio:language", { detail: { lang: "en" } })); }}>{"EN"}</button>
+        </div>
+      </div>
       <header className="case-hero">
-        <p className="mono">{project.index} / Selected work / {project.year}</p>
+        <p className="mono">{project.index} / {lang === "en" ? "Selected work" : "Vybraná práce"} / {project.year}</p>
         <h1>{project.title}</h1>
-        <p className="case-deck">{project.cs}</p>
-        <a className="case-live" href={project.live} target="_blank" rel="noreferrer">Visit live product</a>
+        <p className="case-deck">{project[lang]}</p>
+        <a className="case-live" href={project.live} target="_blank" rel="noreferrer">{lang === "en" ? "Visit live product" : "Navštívit produkt"}</a>
       </header>
       <PixelCarousel project={project} />
       <section className="case-facts">
-        <article><span className="mono">Problem</span><p>{project.problem}</p></article>
-        <article><span className="mono">Role</span><p>{project.role}</p></article>
-        <article><span className="mono">Result</span><p>{project.result}</p></article>
+        <article><span className="mono">{lang === "en" ? "Problem" : "Problém"}</span><p>{project[lang === "en" ? "problemEn" : "problem"]}</p></article>
+        <article><span className="mono">Role</span><p>{project[lang === "en" ? "roleEn" : "role"]}</p></article>
+        <article><span className="mono">{lang === "en" ? "Outcome" : "Výsledek"}</span><p>{project[lang === "en" ? "resultEn" : "result"]}</p></article>
       </section>
-      <nav className="case-next" aria-label="Next project">
-        <span className="mono">Next case study</span>
-        <a href={`${projects[(projects.indexOf(project) + 1) % projects.length].id}.html`}>{projects[(projects.indexOf(project) + 1) % projects.length].title}</a>
+      <nav className="case-next" aria-label={lang === "en" ? "Next project" : "Další projekt"}>
+        <span className="mono">{lang === "en" ? "Next case study" : "Další případová studie"}</span>
+        <a href={`${nextProject.id}.html`}>{nextProject.title}</a>
       </nav>
     </main>
   );
 }
 
 function ArchiveGallery() {
+  const lang = useLanguage();
   const x = useMotionValue(0); const y = useMotionValue(0);
   const smoothX = useSpring(x, { stiffness: 140, damping: 26 });
   const smoothY = useSpring(y, { stiffness: 140, damping: 26 });
   const canDrag = useMemo(() => matchMedia("(hover:hover) and (pointer:fine)").matches, []);
-  const items = [...projects, ...projects].map((project, index) => ({ ...project, uid: `${project.id}-${index}` }));
+  const compact = useMemo(() => matchMedia("(min-width:761px) and (max-width:1100px)").matches, []);
   return (
     <main className="archive-page">
-      <header className="archive-header"><a href="index.html">Kamil Hortík</a><span className="mono">Visual archive / drag to explore</span><a href="index.html#contact">Contact</a></header>
-      <motion.div className="archive-canvas" drag={canDrag} dragConstraints={{ left: -620, right: 80, top: -460, bottom: 80 }} style={canDrag ? { x: smoothX, y: smoothY } : undefined}>
-        {items.map((item, index) => <a key={item.uid} href={item.href} className={`archive-card archive-card--${index + 1}`}><img src={item.cover} alt="" draggable="false" /><span>{item.title}</span><small className="mono">{item.index} / {item.year}</small></a>)}
+      <header className="archive-header"><a href="index.html">Kamil Hortík</a><span className="mono">{lang === "en" ? "Selected work / drag to explore" : "Vybrané projekty / přetáhněte"}</span><a href="index.html#contact">{lang === "en" ? "Contact" : "Kontakt"}</a></header>
+      <motion.div className="archive-canvas" drag={canDrag} dragConstraints={{ left: compact ? -120 : -620, right: 80, top: compact ? -120 : -460, bottom: 80 }} style={canDrag ? { x: smoothX, y: smoothY } : undefined}>
+        {projects.map((item, index) => <a key={item.id} href={item.href} className={`archive-card archive-card--${index + 1}`}><img src={item.cover} alt="" draggable="false" /><span>{item.title}</span><small className="mono">{item.index} / {item.year}</small></a>)}
       </motion.div>
     </main>
   );

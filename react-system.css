@@ -17,7 +17,7 @@
 .project-fallback{display:none}
 .react-ready .project-list{display:none}
 
-.case-page{min-height:100vh;padding:28px var(--pad) 0}
+.case-page{min-height:100vh;padding:28px var(--pad) 0}.case-topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:clamp(90px,14vw,190px)}.case-topline .case-back{margin-bottom:0}
 .case-back{display:inline-block;margin-bottom:clamp(90px,14vw,190px);border-bottom:1px solid var(--line);padding-bottom:5px}
 .case-hero{display:grid;grid-template-columns:1fr 2fr 1fr;align-items:end;gap:24px;margin-bottom:clamp(70px,10vw,130px)}
 .case-hero>p:first-child{align-self:start;color:var(--muted)}
@@ -44,11 +44,11 @@
 .archive-page:active{cursor:grabbing}
 .archive-header{position:fixed;z-index:5;inset:0 0 auto;display:grid;grid-template-columns:1fr auto 1fr;padding:22px var(--pad);mix-blend-mode:multiply;pointer-events:none}
 .archive-header a{pointer-events:auto}.archive-header a:last-child{justify-self:end}
-.archive-canvas{position:absolute;width:1540px;height:1050px;left:50%;top:50%;margin:-525px 0 0 -770px}
+.archive-canvas{position:absolute;width:1540px;height:760px;left:50%;top:50%;margin:-380px 0 0 -770px}
 .archive-card{position:absolute;width:330px;background:var(--paper);padding:10px 10px 16px;user-select:none}
 .archive-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;pointer-events:none}
 .archive-card span{display:block;font-family:var(--font-display);font-size:1.6rem;letter-spacing:-.05em;margin-top:12px}.archive-card small{color:var(--muted)}
-.archive-card--1{left:120px;top:120px;transform:rotate(-4deg)}.archive-card--2{left:610px;top:60px;transform:rotate(2deg)}.archive-card--3{left:1050px;top:190px;transform:rotate(-2deg)}.archive-card--4{left:260px;top:590px;transform:rotate(3deg)}.archive-card--5{left:730px;top:540px;transform:rotate(-3deg)}.archive-card--6{left:1150px;top:620px;transform:rotate(2deg)}
+.archive-card--1{left:110px;top:110px;transform:rotate(-4deg)}.archive-card--2{left:610px;top:280px;transform:rotate(2deg)}.archive-card--3{left:1080px;top:90px;transform:rotate(-2deg)}
 
 @media(max-width:760px){
   .role-reel{display:block;min-width:0;margin-top:5px}
@@ -56,7 +56,7 @@
   .project-explorer__stage{position:static;width:100%}.project-preview img{aspect-ratio:1.1;border-radius:14px}
   .project-preview__caption{display:block}.project-preview__caption .mono{display:block;margin-top:10px}
   .project-explorer__list{width:100%}.project-row{grid-template-columns:30px 1fr auto;padding:18px 0}.project-row__kind{display:none}.project-row__name{font-size:2.8rem}.project-row__year{font-size:9px}
-  .case-page{padding-top:18px}.case-back{margin-bottom:90px}.case-hero{display:block}.case-hero>p:first-child{margin-bottom:24px}.case-hero h1{font-size:27vw;margin:0 0 48px}.case-deck{font-size:2rem}.case-live{display:inline-block;margin-top:30px}
+  .case-page{padding-top:18px}.case-topline{margin-bottom:90px}.case-hero{display:block}.case-hero>p:first-child{margin-bottom:24px}.case-hero h1{font-size:27vw;margin:0 0 48px}.case-deck{font-size:2rem}.case-live{display:inline-block;margin-top:30px}
   .case-gallery{padding:12px}.pixel-frame{height:auto;aspect-ratio:4/3}.carousel-control{grid-template-columns:auto 1fr auto}.carousel-control>span{display:none}.carousel-dots{justify-content:center}.carousel-dots button{width:26px}
   .case-facts{grid-template-columns:1fr;margin-block:110px}.case-facts article{min-height:0;padding:26px 0 46px}.case-facts p{margin-top:30px;font-size:2rem}
   .case-next{min-height:55svh}.case-next a{font-size:24vw}
@@ -64,4 +64,32 @@
   .archive-header{grid-template-columns:1fr auto;background:rgba(217,216,208,.88);backdrop-filter:blur(12px)}.archive-header .mono{display:none}
   .archive-canvas{position:relative;inset:auto;width:auto;height:auto;margin:0;display:grid;gap:36px}
   .archive-card{position:relative;inset:auto!important;width:100%;transform:none!important}.archive-card span{font-size:2.2rem}
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: min(100svh, 820px);
+    padding-top: 110px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .hero-copy { margin-bottom: 0; }
+  .hero-portrait {
+    width: min(48vw, 260px);
+    max-height: 260px;
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .archive-canvas {
+    width: 780px;
+    height: 550px;
+    margin: -275px 0 0 -390px;
+  }
+  .archive-card { width: 280px; }
+  .archive-card--1 { left: 10px; top: 40px; }
+  .archive-card--2 { left: 250px; top: 150px; }
+  .archive-card--3 { left: 500px; top: 70px; }
 }
