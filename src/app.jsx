@@ -211,15 +211,21 @@ function CaseStudy({ id }) {
 
 function ArchiveGallery() {
   const lang = useLanguage();
+  const archiveRef = useRef(null);
+  const [canDrag, setCanDrag] = useState(false);
   const x = useMotionValue(0); const y = useMotionValue(0);
   const smoothX = useSpring(x, { stiffness: 140, damping: 26 });
   const smoothY = useSpring(y, { stiffness: 140, damping: 26 });
-  const canDrag = useMemo(() => matchMedia("(hover:hover) and (pointer:fine)").matches, []);
-  const compact = useMemo(() => matchMedia("(min-width:761px) and (max-width:1100px)").matches, []);
+  useEffect(() => {
+    const updateDragMode = () => setCanDrag(matchMedia("(hover:hover) and (pointer:fine)").matches && window.innerWidth > 1539);
+    updateDragMode();
+    window.addEventListener("resize", updateDragMode);
+    return () => window.removeEventListener("resize", updateDragMode);
+  }, []);
   return (
-    <main className="archive-page">
-      <header className="archive-header"><a href="index.html">Kamil Hortík</a><span className="mono">{lang === "en" ? "Selected work / drag to explore" : "Vybrané projekty / přetáhněte"}</span><a href="index.html#contact">{lang === "en" ? "Contact" : "Kontakt"}</a></header>
-      <motion.div className="archive-canvas" drag={canDrag} dragConstraints={{ left: compact ? -120 : -620, right: 80, top: compact ? -120 : -460, bottom: 80 }} style={canDrag ? { x: smoothX, y: smoothY } : undefined}>
+      <main className={`archive-page ${canDrag ? "is-draggable" : ""}`} ref={archiveRef}>
+      <header className="archive-header"><a href="index.html">Kamil Hortík</a><span className="mono">{canDrag ? (lang === "en" ? "Selected work / drag to explore" : "Vybrané projekty / přetáhněte") : (lang === "en" ? "Selected work / choose a project" : "Vybrané projekty / vyberte projekt")}</span><a href="index.html#contact">{lang === "en" ? "Contact" : "Kontakt"}</a></header>
+      <motion.div className="archive-canvas" drag={canDrag} dragConstraints={archiveRef} dragMomentum={false} dragElastic={0} style={canDrag ? { x: smoothX, y: smoothY } : undefined}>
         {projects.map((item, index) => <a key={item.id} href={item.href} className={`archive-card archive-card--${index + 1}`}><img src={item.cover} alt="" draggable="false" /><span>{item.title}</span><small className="mono">{item.index} / {item.year}</small></a>)}
       </motion.div>
     </main>

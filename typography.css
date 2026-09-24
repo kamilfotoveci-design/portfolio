@@ -1,4 +1,4 @@
-/* Typography direction: expressive grotesk display + calm editorial body. */
+/* Typography direction: precise, restrained sans with clear editorial hierarchy. */
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -21,8 +21,8 @@ body {
 }
 
 :root {
-  --font-display: "Bricolage Grotesque", sans-serif;
-  --font-body: "Source Sans 3", sans-serif;
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
   --font-mono: "DM Mono", monospace;
   --text-display-xl: clamp(4.75rem, 13vw, 13.75rem);
   --text-display: clamp(3.25rem, 7vw, 7rem);
@@ -33,12 +33,11 @@ body {
   --text-body: clamp(1rem, 1.1vw, 1.125rem);
   --text-small: 0.875rem;
   --text-caption: 0.68rem;
-  --tracking-display: -0.065em;
-  --tracking-body: -0.012em;
-  --leading-display: 0.86;
+  --tracking-display: -0.045em;
+  --tracking-body: -0.018em;
+  --leading-display: 0.94;
   --leading-body: 1.5;
   font-family: var(--font-body);
-  font-optical-sizing: auto;
 }
 
 body,
@@ -68,8 +67,6 @@ h3,
 .contact-cta,
 .dialog-bottom h2 {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
-  font-variation-settings: "opsz" 48, "wdth" 92;
   letter-spacing: var(--tracking-display);
   text-transform: none;
 }
@@ -288,7 +285,7 @@ h1 em {
 }
 
 .project--nacas .project-info h3 {
-  font-variation-settings: "opsz" 48, "wdth" 82;
+  letter-spacing: -0.035em;
 }
 
 .project--subsentry .project-info h3 {
@@ -317,10 +314,9 @@ h1 em {
 
 .contact h2 {
   font-family: var(--font-display);
-  font-variation-settings: "opsz" 48, "wdth" 88;
   font-size: clamp(5rem, 16vw, 16.25rem);
-  line-height: 0.8;
-  letter-spacing: -0.08em;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
   font-weight: 560;
 }
 
