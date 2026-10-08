@@ -6,6 +6,43 @@ const storedLanguage = (() => {
 let language = storedLanguage === "en" ? "en" : "cs";
 const header = document.querySelector(".site-header");
 const menuButton = document.querySelector(".nav-toggle");
+const wordRevealSelector = [
+  ".intro-lede",
+  ".section-heading h2",
+  ".section-heading > p",
+  ".project h3",
+  ".project-description",
+  ".project-role",
+  ".project-copy .text-link > span:first-child",
+  ".about-content h2",
+  ".about-content > div > p:not(.about-signoff)",
+  ".contact-top > p:last-child",
+  ".contact-link > span:first-child"
+].join(", ");
+document.querySelectorAll(wordRevealSelector).forEach(element => element.setAttribute("data-reveal-words", ""));
+
+function prepareWordReveal() {
+  document.querySelectorAll("[data-reveal-words]").forEach(element => {
+    const fragment = document.createDocumentFragment();
+    const text = element.textContent.trim();
+    let wordIndex = 0;
+    text.split(/(\s+)/).forEach(part => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) {
+        fragment.append(document.createTextNode(part));
+        return;
+      }
+      const word = document.createElement("span");
+      word.className = "reveal-word";
+      word.style.setProperty("--word-delay", `${Math.min(wordIndex * 32, 448)}ms`);
+      word.textContent = part;
+      fragment.append(word);
+      wordIndex += 1;
+    });
+    element.replaceChildren(fragment);
+    element.classList.add("has-word-reveal");
+  });
+}
 
 function setLanguage(nextLanguage) {
   language = nextLanguage === "en" ? "en" : "cs";
@@ -20,6 +57,7 @@ function setLanguage(nextLanguage) {
   document.querySelectorAll("[data-cs][data-en]").forEach(element => {
     element.textContent = element.dataset[language];
   });
+  prepareWordReveal();
   document.querySelectorAll(".lang").forEach(button => {
     const active = button.dataset.lang === language;
     button.classList.toggle("is-active", active);
@@ -73,13 +111,15 @@ if (portrait && portraitTilt && window.matchMedia("(hover: hover) and (pointer: 
 }
 
 if ("IntersectionObserver" in window) {
-  const revealItems = [...document.querySelectorAll(
-    ".intro-copy, .intro-portrait, .section-heading, .project-copy, .project-image, .about-content, .contact-link"
-  )];
+  const wordItems = [...document.querySelectorAll("[data-reveal-words]")];
+  const revealItems = [...new Set([
+    ...wordItems,
+    ...document.querySelectorAll(".intro-portrait, .project-image")
+  ])];
   revealItems.forEach(item => {
-    item.dataset.reveal = "";
+    if (item.matches(".intro-portrait, .project-image")) item.dataset.reveal = "";
     if (item.classList.contains("intro-portrait")) item.style.setProperty("--reveal-delay", "140ms");
-    if (item.classList.contains("project-image")) item.style.setProperty("--reveal-delay", "100ms");
+    if (item.classList.contains("project-image")) item.style.setProperty("--reveal-delay", "180ms");
   });
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -89,6 +129,10 @@ if ("IntersectionObserver" in window) {
     });
   }, { threshold: .12, rootMargin: "0px 0px -7% 0px" });
   revealItems.forEach(item => revealObserver.observe(item));
+} else {
+  document.querySelectorAll("[data-reveal-words], .intro-portrait, .project-image").forEach(item => {
+    item.classList.add("is-revealed");
+  });
 }
 
 setLanguage(language);
