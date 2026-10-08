@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
 
 const projects = [
   {
@@ -82,19 +82,21 @@ function useLanguage() {
 
 function RoleReel() {
   const lang = useLanguage();
+  const prefersReducedMotion = useReducedMotion();
   const roles = lang === "en"
     ? ["product systems", "interfaces", "working software"]
     : ["produktové systémy", "rozhraní", "funkční software"];
   const [index, setIndex] = useState(0);
   useEffect(() => {
     setIndex(0);
+    if (prefersReducedMotion) return undefined;
     const timer = window.setInterval(() => setIndex(value => (value + 1) % roles.length), 2600);
     return () => window.clearInterval(timer);
-  }, [lang]);
+  }, [lang, prefersReducedMotion]);
   return (
     <span className="role-reel" aria-label={roles.join(", ")}>
       <AnimatePresence mode="wait">
-        <motion.span key={`${lang}-${index}`} initial={{ y: "95%" }} animate={{ y: 0 }} exit={{ y: "-95%" }} transition={{ duration: .55, ease: [.16, 1, .3, 1] }}>
+        <motion.span key={`${lang}-${index}`} initial={prefersReducedMotion ? false : { y: "95%" }} animate={{ y: 0 }} exit={prefersReducedMotion ? undefined : { y: "-95%" }} transition={{ duration: prefersReducedMotion ? .01 : .55, ease: [.16, 1, .3, 1] }}>
           {roles[index]}
         </motion.span>
       </AnimatePresence>
@@ -104,6 +106,7 @@ function RoleReel() {
 
 function ProjectExplorer() {
   const lang = useLanguage();
+  const prefersReducedMotion = useReducedMotion();
   const [active, setActive] = useState(0);
   const [pointer, setPointer] = useState(false);
   useEffect(() => {
@@ -128,12 +131,16 @@ function ProjectExplorer() {
       </div>
       <div className="project-explorer__stage">
         <AnimatePresence mode="wait">
-          <motion.a key={selected.id} href={selected.href} className="project-preview"
-            initial={{ opacity: 0, clipPath: "inset(8% 0 8% 0)" }} animate={{ opacity: 1, clipPath: "inset(0% 0 0% 0)" }} exit={{ opacity: 0 }} transition={{ duration: .48, ease: [.16, 1, .3, 1] }}>
-            <img src={selected.cover} alt="" />
+          <motion.a key={selected.id} href={selected.href} className="project-preview" data-project={selected.id}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: prefersReducedMotion ? .01 : .48, ease: [.16, 1, .3, 1] }}>
+            <span className="project-preview__frame" data-tilt data-tilt-max="3">
+              <img src={selected.cover} alt="" />
+              <span className="project-preview__frame-index mono">{selected.index} / 03</span>
+              <span className="project-preview__frame-glint" aria-hidden="true" />
+            </span>
             <span className="project-preview__caption">
-              <span>{selected[lang]}</span>
-              <span className="mono">{lang === "en" ? "View case study" : "Otevřít případovou studii"}</span>
+              <span><strong>{selected.title}</strong><small>{selected[lang]}</small></span>
+              <span className="project-preview__action mono">{lang === "en" ? "Explore case study" : "Prozkoumat případovou studii"}<i aria-hidden="true">↗</i></span>
             </span>
           </motion.a>
         </AnimatePresence>
@@ -178,10 +185,11 @@ function PixelCarousel({ project }) {
 
 function CaseStudy({ id }) {
   const lang = useLanguage();
+  const prefersReducedMotion = useReducedMotion();
   const project = projects.find(item => item.id === id) || projects[0];
   const nextProject = projects[(projects.indexOf(project) + 1) % projects.length];
   return (
-    <main className="case-page">
+    <motion.main className="case-page" initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: prefersReducedMotion ? .01 : .65, ease: [.2, .75, .2, 1] }}>
       <div className="case-topline">
         <a className="case-back mono" href="../#work">{lang === "en" ? "Back to work" : "Zpět na projekty"}</a>
         <div className="language" aria-label={lang === "en" ? "Language" : "Jazyk"}>
@@ -197,15 +205,21 @@ function CaseStudy({ id }) {
       </header>
       <PixelCarousel project={project} />
       <section className="case-facts">
-        <article><span className="mono">{lang === "en" ? "Problem" : "Problém"}</span><p>{project[lang === "en" ? "problemEn" : "problem"]}</p></article>
-        <article><span className="mono">Role</span><p>{project[lang === "en" ? "roleEn" : "role"]}</p></article>
-        <article><span className="mono">{lang === "en" ? "Outcome" : "Výsledek"}</span><p>{project[lang === "en" ? "resultEn" : "result"]}</p></article>
+        {[
+          [lang === "en" ? "Problem" : "Problém", project[lang === "en" ? "problemEn" : "problem"]],
+          ["Role", project[lang === "en" ? "roleEn" : "role"]],
+          [lang === "en" ? "Outcome" : "Výsledek", project[lang === "en" ? "resultEn" : "result"]]
+        ].map(([label, value], index) => (
+          <motion.article key={label} initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .3 }} transition={{ duration: prefersReducedMotion ? .01 : .6, delay: prefersReducedMotion ? 0 : index * .08, ease: [.2, .75, .2, 1] }}>
+            <span className="mono">{label}</span><p>{value}</p>
+          </motion.article>
+        ))}
       </section>
       <nav className="case-next" aria-label={lang === "en" ? "Next project" : "Další projekt"}>
         <span className="mono">{lang === "en" ? "Next case study" : "Další případová studie"}</span>
         <a href={`${nextProject.id}.html`}>{nextProject.title}</a>
       </nav>
-    </main>
+    </motion.main>
   );
 }
 

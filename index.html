@@ -7,12 +7,13 @@
     <title>Kamil Hortík — Product Designer & Builder</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css?v=3" />
     <link rel="stylesheet" href="polish.css?v=3" />
     <link rel="stylesheet" href="layout-fixes.css?v=1" />
     <link rel="stylesheet" href="typography.css?v=1" />
     <link rel="stylesheet" href="react-system.css?v=6" />
+    <link rel="stylesheet" href="premium.css?v=1" />
   </head>
   <body>
     <header class="site-header" data-header>
@@ -35,13 +36,24 @@
         <div class="hero-meta mono"><span>01—03</span><span data-cs="Vybraná práce" data-en="Selected work">Vybraná práce</span></div>
         <div class="hero-copy">
           <p class="eyebrow mono"><span data-cs="Navrhuji" data-en="I design">Navrhuji</span> <span id="role-reel">produktové systémy</span></p>
-          <h1 id="hero-title"><span class="line-mask"><span class="line">Kamil</span></span><span class="line-mask"><span class="line"><em>Hortík</em></span></span></h1>
+          <h1 id="hero-title"><span class="line-mask"><span class="line hero-title-line">Kamil</span></span><span class="line-mask"><span class="line hero-title-line"><em>Hortík</em></span></span></h1>
           <p class="hero-note" data-cs="Navrhuji a stavím digitální produkty od prvního systému po poslední detail." data-en="I design and build digital products from the first system to the last detail.">Navrhuji a stavím digitální produkty od prvního systému po poslední detail.</p>
         </div>
-        <figure class="hero-portrait">
-          <img src="assets/profile-new.png" alt="Kamil Hortík" width="1254" height="1254" fetchpriority="high" />
-          <figcaption class="mono"><span data-cs="portrét / 2026" data-en="portrait / 2026">portrét / 2026</span><span data-cs="↘ pokračujte posunem" data-en="↘ scroll to enter">↘ pokračujte posunem</span></figcaption>
-        </figure>
+        <div class="hero-stage" data-depth-scene>
+          <div class="hero-stage__halo" aria-hidden="true"></div>
+          <figure class="hero-portrait" data-depth-layer="1">
+            <img src="assets/profile-new.png" alt="Kamil Hortík" width="1254" height="1254" fetchpriority="high" />
+            <figcaption class="mono"><span data-cs="portrét / 2026" data-en="portrait / 2026">portrét / 2026</span><span data-cs="↘ pokračujte posunem" data-en="↘ scroll to enter">↘ pokračujte posunem</span></figcaption>
+          </figure>
+          <a class="hero-film" href="#work" data-tilt data-tilt-max="4" aria-label="Přehrát ukázku projektů a pokračovat k práci" data-cs-label="Přehrát ukázku projektů a pokračovat k práci" data-en-label="View the project film and continue to work">
+            <span class="hero-film__chrome mono"><span><i></i> STUDIO FILM / 01—03</span><span>00:10</span></span>
+            <video class="hero-film__video" data-work-film autoplay muted loop playsinline preload="none" poster="assets/lasero.png" aria-hidden="true">
+              <source src="assets/portfolio-film.mp4" type="video/mp4" />
+            </video>
+            <span class="hero-film__caption"><span data-cs="Nápad → produkt" data-en="Idea → product">Nápad → produkt</span><span aria-hidden="true">↗</span></span>
+          </a>
+          <span class="hero-stage__index mono" aria-hidden="true">KH—001</span>
+        </div>
         <div class="hero-rule" aria-hidden="true"></div>
       </section>
 
@@ -112,6 +124,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
     <script src="script.js"></script>
     <script type="module" src="assets/app.js?v=6"></script>
   </body>
