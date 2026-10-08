@@ -57,17 +57,18 @@ document.querySelectorAll(".primary-nav a").forEach(link => link.addEventListene
 document.addEventListener("keydown", event => { if (event.key === "Escape") closeMenu(); });
 
 const portrait = document.querySelector(".intro-portrait");
-if (portrait && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+const portraitTilt = document.querySelector(".portrait-tilt");
+if (portrait && portraitTilt && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
   portrait.addEventListener("pointermove", event => {
     const bounds = portrait.getBoundingClientRect();
-    const x = ((event.clientX - bounds.left) / bounds.width) * 100;
-    const y = ((event.clientY - bounds.top) / bounds.height) * 100;
-    portrait.style.setProperty("--light-x", `${x.toFixed(1)}%`);
-    portrait.style.setProperty("--light-y", `${y.toFixed(1)}%`);
+    const x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+    const y = ((event.clientY - bounds.top) / bounds.height) * 2 - 1;
+    portraitTilt.style.setProperty("--tilt-x", `${(-y * 4).toFixed(1)}deg`);
+    portraitTilt.style.setProperty("--tilt-y", `${(x * 7).toFixed(1)}deg`);
   });
   portrait.addEventListener("pointerleave", () => {
-    portrait.style.setProperty("--light-x", "72%");
-    portrait.style.setProperty("--light-y", "30%");
+    portraitTilt.style.setProperty("--tilt-x", "0deg");
+    portraitTilt.style.setProperty("--tilt-y", "0deg");
   });
 }
 
