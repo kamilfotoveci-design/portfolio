@@ -29,7 +29,7 @@ const projects = [
     kind: "Fintech / SaaS",
     year: "2026",
     cover: "assets/nacas.png",
-    full: "assets/nacas-full.png",
+    full: "assets/nacas.png",
     href: "work/nacas.html",
     live: "https://nacas.pages.dev",
     cs: "Fakturace pro malé firmy v Česku a na Slovensku bez účetního balastu.",
@@ -151,12 +151,10 @@ function ProjectExplorer() {
 
 function PixelCarousel({ project }) {
   const lang = useLanguage();
-  const slides = useMemo(() => [
-    { src: `../${project.cover}`, position: "center", label: lang === "en" ? "Overview" : "Přehled" },
-    { src: `../${project.full}`, position: "top", label: lang === "en" ? "Full-page top" : "Horní část stránky" },
-    { src: `../${project.full}`, position: "center", label: lang === "en" ? "Full-page middle" : "Střed stránky" },
-    { src: `../${project.full}`, position: "bottom", label: lang === "en" ? "Full-page bottom" : "Spodní část stránky" }
-  ], [project, lang]);
+  const slides = useMemo(() => [...new Set([project.cover, project.full])].map((src, index) => ({
+    src: `../${src}`,
+    label: lang === "en" ? (index === 0 ? "Product interface" : "Website") : (index === 0 ? "Rozhraní produktu" : "Webová stránka")
+  })), [project, lang]);
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
   const choose = next => { setDirection(next > active ? 1 : -1); setActive(next); };
@@ -166,19 +164,18 @@ function PixelCarousel({ project }) {
       <div className="pixel-frame">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.img key={active} src={slides[active].src} alt={`${project.title} — ${slides[active].label}`}
-            style={{ objectPosition: slides[active].position }}
-            initial={{ opacity: 0, x: direction * 28, filter: "contrast(1.2) saturate(.35)" }}
-            animate={{ opacity: 1, x: 0, filter: "contrast(1) saturate(1)" }} exit={{ opacity: 0, x: direction * -18 }}
+            initial={{ opacity: 0, x: direction * 18 }}
+            animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: direction * -12 }}
             transition={{ duration: .52, ease: [.16, 1, .3, 1] }} />
         </AnimatePresence>
         <motion.div className="pixel-wipe" key={`wipe-${active}`} initial={{ scaleX: 1 }} animate={{ scaleX: 0 }} transition={{ duration: .62, ease: [.76, 0, .24, 1] }} />
       </div>
-      <div className="carousel-control">
+      {slides.length > 1 && <div className="carousel-control">
         <button type="button" onClick={() => step(-1)} aria-label={lang === "en" ? "Previous image" : "Předchozí obrázek"}>{lang === "en" ? "Prev" : "Zpět"}</button>
         <div className="carousel-dots" role="tablist" aria-label={lang === "en" ? "Gallery images" : "Obrázky galerie"}>{slides.map((slide, index) => <button type="button" role="tab" key={slide.label} className={index === active ? "is-active" : ""} onClick={() => choose(index)} aria-selected={index === active} aria-label={`${lang === "en" ? "Show" : "Zobrazit"} ${slide.label}`} />)}</div>
         <span className="mono">{String(active + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}</span>
         <button type="button" onClick={() => step(1)} aria-label={lang === "en" ? "Next image" : "Další obrázek"}>{lang === "en" ? "Next" : "Další"}</button>
-      </div>
+      </div>}
     </section>
   );
 }

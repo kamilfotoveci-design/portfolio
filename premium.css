@@ -340,10 +340,10 @@ h1 em {
 .case-deck { grid-column: 2; max-width: 23ch; color: #52564e; font-family: var(--font-body); font-size: clamp(20px,2.6vw,38px); line-height: 1.26; letter-spacing: -.04em; }
 .case-live { align-self: end; margin-bottom: 5px; border-color: var(--line); transition: color .25s ease, border-color .25s ease; }
 .case-live:hover { color: var(--accent); border-color: var(--accent); }
-.case-gallery { margin-inline: calc(var(--pad)*-1); padding: clamp(24px,5vw,78px) var(--pad); background: #191b17; }
-.pixel-frame { height: min(76vw, 900px); border: 1px solid rgba(241,239,232,.12); border-radius: 20px; background: #20221d; }
-.pixel-frame img { object-fit: cover; }
-.pixel-wipe { pointer-events: none; }
+.case-gallery { margin: 0 0 clamp(90px,13vw,170px); padding: 0; background: transparent; }
+.pixel-frame { position: relative; display: flex; justify-content: center; height: auto; overflow: hidden; padding: clamp(14px,3vw,38px); border: 1px solid rgba(23,25,20,.06); border-radius: clamp(22px,3vw,34px); background: #e9e7df; box-shadow: 0 28px 78px rgba(33,36,29,.085), 0 3px 8px rgba(33,36,29,.04); }
+.pixel-frame img { position: relative; inset: auto; display: block; width: 100%; height: auto; max-height: none; border-radius: clamp(12px,1.6vw,20px); object-fit: contain; }
+.pixel-wipe { pointer-events: none; background: #e9e7df; }
 .carousel-control { gap: 26px; }
 .carousel-control button { min-width: 44px; color: rgba(241,239,232,.72); transition: color .2s ease; }
 .carousel-control button:hover { color: var(--paper); }
@@ -442,8 +442,8 @@ h1 em {
   .case-hero h1 { margin: 0 0 27px; font-size: clamp(72px,17vw,128px); }
   .case-deck { max-width: 29ch; font-size: 23px; }
   .case-live { margin-top: 25px; }
-  .case-gallery { padding: 14px 18px; }
-  .pixel-frame { height: auto; aspect-ratio: 4/3; border-radius: 12px; }
+  .case-gallery { margin-bottom: 80px; padding: 0; }
+  .pixel-frame { height: auto; aspect-ratio: auto; padding: 12px; border-radius: 23px; }
   .case-facts { grid-template-columns: 1fr; margin-block: 90px; }
   .case-facts article { min-height: 0; padding: 23px 0 34px; }
   .case-facts p { max-width: 28ch; margin-top: 25px; font-size: 32px; }

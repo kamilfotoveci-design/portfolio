@@ -56,4 +56,29 @@ menuButton?.addEventListener("click", () => {
 document.querySelectorAll(".primary-nav a").forEach(link => link.addEventListener("click", closeMenu));
 document.addEventListener("keydown", event => { if (event.key === "Escape") closeMenu(); });
 
+const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+if ("IntersectionObserver" in window && !motionPreference.matches) {
+  const revealItems = [...document.querySelectorAll(
+    ".intro-copy, .intro-portrait, .section-heading, .project-copy, .project-image, .about-content, .contact-link"
+  )];
+  revealItems.forEach(item => {
+    item.dataset.reveal = "";
+    if (item.classList.contains("intro-portrait")) item.style.setProperty("--reveal-delay", "140ms");
+    if (item.classList.contains("project-image")) item.style.setProperty("--reveal-delay", "100ms");
+  });
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-revealed");
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: .12, rootMargin: "0px 0px -7% 0px" });
+  revealItems.forEach(item => revealObserver.observe(item));
+  motionPreference.addEventListener("change", event => {
+    if (!event.matches) return;
+    revealObserver.disconnect();
+    revealItems.forEach(item => item.classList.add("is-revealed"));
+  });
+}
+
 setLanguage(language);
