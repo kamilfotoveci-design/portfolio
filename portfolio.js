@@ -56,9 +56,8 @@ menuButton?.addEventListener("click", () => {
 document.querySelectorAll(".primary-nav a").forEach(link => link.addEventListener("click", closeMenu));
 document.addEventListener("keydown", event => { if (event.key === "Escape") closeMenu(); });
 
-const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 const portrait = document.querySelector(".intro-portrait");
-if (portrait && !motionPreference.matches && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+if (portrait && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
   portrait.addEventListener("pointermove", event => {
     const bounds = portrait.getBoundingClientRect();
     const x = ((event.clientX - bounds.left) / bounds.width) * 100;
@@ -72,7 +71,7 @@ if (portrait && !motionPreference.matches && window.matchMedia("(hover: hover) a
   });
 }
 
-if ("IntersectionObserver" in window && !motionPreference.matches) {
+if ("IntersectionObserver" in window) {
   const revealItems = [...document.querySelectorAll(
     ".intro-copy, .intro-portrait, .section-heading, .project-copy, .project-image, .about-content, .contact-link"
   )];
@@ -89,11 +88,6 @@ if ("IntersectionObserver" in window && !motionPreference.matches) {
     });
   }, { threshold: .12, rootMargin: "0px 0px -7% 0px" });
   revealItems.forEach(item => revealObserver.observe(item));
-  motionPreference.addEventListener("change", event => {
-    if (!event.matches) return;
-    revealObserver.disconnect();
-    revealItems.forEach(item => item.classList.add("is-revealed"));
-  });
 }
 
 setLanguage(language);

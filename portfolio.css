@@ -189,8 +189,12 @@ h1 { max-width: 10.5ch; margin-bottom: 27px; font-size: clamp(68px, 7.3vw, 112px
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .status-dot, .intro-portrait::before, .intro-portrait::after, .intro-portrait img { animation: none !important; }
+  .status-dot { animation-duration: 3.2s; }
+  .intro-portrait::before { animation-duration: 52s; }
+  .intro-portrait::after { animation-duration: 14s; }
+  .intro-portrait img { animation-name: portrait-drift-reduced; animation-duration: 8s; }
+  @keyframes portrait-drift-reduced { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
   .headline-line, .intro-portrait { animation-duration: .55s !important; }
   *, *::before, *::after { transition-duration: .15s !important; }
-  [data-reveal] { opacity: 1; transform: none; }
+  [data-reveal] { transform: translateY(8px); transition-duration: .35s !important; }
 }
