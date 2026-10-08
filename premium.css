@@ -7,9 +7,9 @@
   --accent: #78856a;
   --accent-light: #d9dfd1;
   --pad: clamp(22px, 4.1vw, 78px);
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Segoe UI", Inter, sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Inter, sans-serif;
-  --font-editorial: "Instrument Serif", Georgia, serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "Inter Tight", "Segoe UI", Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Inter Tight", "Segoe UI", Arial, sans-serif;
+  --font-editorial: var(--font-display);
   --ease-studio: cubic-bezier(.2, .75, .2, 1);
   color: var(--ink);
   background: var(--paper);
