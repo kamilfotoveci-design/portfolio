@@ -20,9 +20,11 @@ const wordRevealSelector = [
   ".contact-link > span:first-child"
 ].join(", ");
 document.querySelectorAll(wordRevealSelector).forEach(element => element.setAttribute("data-reveal-words", ""));
+let wordRevealObserver = null;
 
 function prepareWordReveal() {
   document.querySelectorAll("[data-reveal-words]").forEach(element => {
+    element.querySelectorAll(".reveal-word").forEach(word => wordRevealObserver?.unobserve(word));
     const fragment = document.createDocumentFragment();
     const text = element.textContent.trim();
     let wordIndex = 0;
@@ -41,6 +43,7 @@ function prepareWordReveal() {
     });
     element.replaceChildren(fragment);
     element.classList.add("has-word-reveal");
+    if (wordRevealObserver) element.querySelectorAll(".reveal-word").forEach(word => wordRevealObserver.observe(word));
   });
 }
 
@@ -110,14 +113,19 @@ if (portrait && portraitTilt && window.matchMedia("(hover: hover) and (pointer: 
   });
 }
 
+setLanguage(language);
+
 if ("IntersectionObserver" in window) {
-  const wordItems = [...document.querySelectorAll("[data-reveal-words]")];
-  const revealItems = [...new Set([
-    ...wordItems,
-    ...document.querySelectorAll(".intro-portrait, .project-image")
-  ])];
+  wordRevealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      wordRevealObserver.unobserve(entry.target);
+    });
+  }, { threshold: .1, rootMargin: "0px 0px -10% 0px" });
+  const revealItems = [...document.querySelectorAll(".intro-portrait, .project-image")];
   revealItems.forEach(item => {
-    if (item.matches(".intro-portrait, .project-image")) item.dataset.reveal = "";
+    item.dataset.reveal = "";
     if (item.classList.contains("intro-portrait")) item.style.setProperty("--reveal-delay", "140ms");
     if (item.classList.contains("project-image")) item.style.setProperty("--reveal-delay", "180ms");
   });
@@ -128,11 +136,13 @@ if ("IntersectionObserver" in window) {
       revealObserver.unobserve(entry.target);
     });
   }, { threshold: .12, rootMargin: "0px 0px -7% 0px" });
-  revealItems.forEach(item => revealObserver.observe(item));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.querySelectorAll(".reveal-word").forEach(word => wordRevealObserver.observe(word));
+    revealItems.forEach(item => revealObserver.observe(item));
+  }));
 } else {
   document.querySelectorAll("[data-reveal-words], .intro-portrait, .project-image").forEach(item => {
     item.classList.add("is-revealed");
   });
+  document.querySelectorAll(".reveal-word").forEach(word => word.classList.add("is-visible"));
 }
-
-setLanguage(language);
