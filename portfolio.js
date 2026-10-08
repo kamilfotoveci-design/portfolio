@@ -57,6 +57,21 @@ document.querySelectorAll(".primary-nav a").forEach(link => link.addEventListene
 document.addEventListener("keydown", event => { if (event.key === "Escape") closeMenu(); });
 
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const portrait = document.querySelector(".intro-portrait");
+if (portrait && !motionPreference.matches && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  portrait.addEventListener("pointermove", event => {
+    const bounds = portrait.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+    const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+    portrait.style.setProperty("--light-x", `${x.toFixed(1)}%`);
+    portrait.style.setProperty("--light-y", `${y.toFixed(1)}%`);
+  });
+  portrait.addEventListener("pointerleave", () => {
+    portrait.style.setProperty("--light-x", "72%");
+    portrait.style.setProperty("--light-y", "30%");
+  });
+}
+
 if ("IntersectionObserver" in window && !motionPreference.matches) {
   const revealItems = [...document.querySelectorAll(
     ".intro-copy, .intro-portrait, .section-heading, .project-copy, .project-image, .about-content, .contact-link"
