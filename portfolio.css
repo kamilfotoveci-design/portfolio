@@ -6,8 +6,8 @@
   --gold: #c7a56b;
   --gutter: clamp(22px, 6.2vw, 98px);
   --page-width: 1640px;
-  --sans: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --serif: "Instrument Serif", "Iowan Old Style", "Times New Roman", serif;
+  --sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --display: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --utility: var(--sans);
   font-family: var(--sans);
   color: var(--paper);
@@ -58,10 +58,10 @@ button:focus-visible, a:focus-visible { outline: 1px solid var(--gold); outline-
 .opening-copy { position: relative; z-index: 1; padding: 0 0 12px clamp(0px, 2vw, 32px); }
 .eyebrow { margin-bottom: clamp(24px, 3vw, 40px); color: #b7b0a1; font-size: 10px; letter-spacing: .025em; text-transform: none; }
 h1, h2, h3, p { margin-top: 0; }
-h1 { margin-bottom: clamp(20px, 3.1vw, 40px); font-family: var(--serif); font-size: clamp(82px, 11.2vw, 166px); font-weight: 400; line-height: .82; letter-spacing: -.055em; text-wrap: balance; }
+h1 { margin-bottom: clamp(24px, 3.4vw, 46px); font-family: var(--display); font-size: clamp(78px, 10.8vw, 156px); font-weight: 500; line-height: .96; letter-spacing: -.025em; text-wrap: balance; }
 .name-line { display: block; width: fit-content; padding: .09em .13em .15em 0; opacity: 0; animation: name-arrive 1.2s cubic-bezier(.16,1,.3,1) .68s forwards; }
 .name-line--last { margin-left: .32em; animation-delay: .9s; }
-.name-period { color: var(--gold); font-family: var(--serif); font-style: italic; font-weight: 400; }
+.name-period { color: var(--gold); font-family: var(--display); font-style: normal; font-weight: 500; }
 @keyframes name-arrive { from { opacity: 0; filter: blur(12px); transform: translateY(.28em); clip-path: inset(0 0 100% 0); } to { opacity: 1; filter: blur(0); transform: translateY(0); clip-path: inset(0); } }
 @keyframes copy-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 .enter-link { display: inline-flex; align-items: center; gap: 12px; color: var(--paper); font-size: 12px; opacity: 0; animation: copy-arrive .9s cubic-bezier(.16,1,.3,1) 1.5s forwards; }
@@ -81,7 +81,7 @@ h1 { margin-bottom: clamp(20px, 3.1vw, 40px); font-family: var(--serif); font-si
 .chapter-tag { display: flex; align-items: center; gap: 12px; color: #9e9789; }
 .chapter-number { color: var(--gold); }
 .work-heading-row { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-top: 20px; padding-top: 25px; border-top: 1px solid var(--hairline); }
-.work-heading-row h2 { margin: 0; font-family: var(--serif); font-size: clamp(54px, 8vw, 112px); font-weight: 400; line-height: .94; letter-spacing: -.045em; text-wrap: balance; }
+.work-heading-row h2 { margin: 0; font-family: var(--display); font-size: clamp(54px, 8vw, 112px); font-weight: 500; line-height: 1.04; letter-spacing: -.02em; text-wrap: balance; }
 .project-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(20px, 4vw, 60px); row-gap: clamp(60px, 10vw, 140px); align-items: start; }
 .project { min-width: 0; }
 .project--lasero { grid-column: 1 / span 7; }
@@ -91,7 +91,7 @@ h1 { margin-bottom: clamp(20px, 3.1vw, 40px); font-family: var(--serif); font-si
 .project--nacas .project-visual { background: #202124; }
 .project--subsentry .project-visual { background: #20211e; }
 .visual-kind { color: #c0b9ab; font-size: 10px; }
-.project-visual h3 { max-width: 100%; margin: auto 0 0; color: var(--paper); font-family: var(--serif); font-size: clamp(54px, 8vw, 112px); font-weight: 400; line-height: .96; letter-spacing: -.045em; text-wrap: balance; }
+.project-visual h3 { max-width: 100%; margin: auto 0 0; color: var(--paper); font-family: var(--display); font-size: clamp(54px, 8vw, 112px); font-weight: 500; line-height: 1.04; letter-spacing: -.018em; text-wrap: balance; }
 .project--subsentry .project-visual h3 { font-size: clamp(42px, 6.2vw, 88px); }
 .project-visual:hover { transform: translateY(-4px); border-color: rgba(199,165,107,.42); }
 .project-visual:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
@@ -103,7 +103,7 @@ h1 { margin-bottom: clamp(20px, 3.1vw, 40px); font-family: var(--serif); font-si
 
 .contact { position: relative; width: min(100% - 20px, 1700px); margin: 0 auto 10px; padding: clamp(30px, 5vw, 70px) clamp(24px, 6vw, 98px) 27px; border: 1px solid rgba(232,225,210,.13); border-radius: 20px; background: #191916; }
 .contact-kicker { margin: clamp(63px, 9vw, 122px) 0 15px; color: #aaa496; font-size: 12px; }
-.contact-link { display: grid; grid-template-columns: minmax(0,1fr) 28px; align-items: center; gap: clamp(12px, 2vw, 24px); padding-bottom: clamp(16px, 2vw, 26px); border-bottom: 1px solid rgba(232,225,210,.25); color: var(--paper); font-family: var(--serif); font-size: clamp(62px, 10vw, 142px); font-weight: 400; line-height: 1; letter-spacing: -.045em; }
+.contact-link { display: grid; grid-template-columns: minmax(0,1fr) 28px; align-items: center; gap: clamp(16px, 2.2vw, 28px); padding-bottom: clamp(20px, 2.4vw, 32px); border-bottom: 1px solid rgba(232,225,210,.25); color: var(--paper); font-family: var(--display); font-size: clamp(58px, 8.6vw, 124px); font-weight: 500; line-height: 1.08; letter-spacing: -.02em; }
 .contact-link > span:first-child { min-width: 0; text-wrap: balance; }
 .contact-link > span:last-child { display: grid; flex: 0 0 28px; width: 28px; height: 28px; place-items: center; color: var(--gold); font: 22px/1 var(--sans); transition: transform .25s cubic-bezier(.16,1,.3,1); }
 .contact-link:hover > span:last-child { transform: translate(5px,-5px); }
@@ -148,7 +148,7 @@ h1 { margin-bottom: clamp(20px, 3.1vw, 40px); font-family: var(--serif); font-si
   .opening-scene { grid-template-columns: 1fr; gap: 4px; margin-top: 0; }
   .opening-copy { padding: 0; }
   .eyebrow { margin-bottom: 27px; font-size: 10px; }
-  h1 { position: relative; z-index: 1; margin-bottom: 14px; font-size: clamp(80px, 20vw, 132px); }
+  h1 { position: relative; z-index: 1; margin-bottom: 20px; font-size: clamp(72px, 18vw, 120px); }
   .name-line--last { margin-left: .25em; }
   .enter-link { font-size: 12px; }
   .enter-mark { width: 23px; height: 23px; }
@@ -160,18 +160,18 @@ h1 { margin-bottom: clamp(20px, 3.1vw, 40px); font-family: var(--serif); font-si
   .section-heading { margin-bottom: 44px; }
   .chapter-tag { gap: 9px; font-size: 9px; }
   .work-heading-row { display: block; margin-top: 16px; padding-top: 19px; }
-  .work-heading-row h2 { max-width: 9ch; font-size: clamp(58px, 15vw, 84px); line-height: .85; }
+  .work-heading-row h2 { max-width: 9ch; font-size: clamp(52px, 13.5vw, 76px); line-height: 1.02; }
   .project-grid { grid-template-columns: minmax(0,1fr); gap: 49px; }
   .project--lasero, .project--nacas, .project--subsentry { grid-column: 1; margin-top: 0; }
   .project-visual { aspect-ratio: 1.1; border-radius: 17px; }
   .visual-kind { font-size: 9px; }
-  .project-visual h3 { font-size: clamp(58px, 16vw, 88px); }
+  .project-visual h3 { font-size: clamp(52px, 14vw, 76px); }
   .project-caption { padding: 14px 2px 0; }
   .project-index { margin-bottom: 0; font-size: 10px; }
   .case-link { gap: 7px; font-size: 11px; }
   .contact { width: calc(100% - 12px); margin-bottom: 6px; padding: 28px 22px 20px; border-radius: 16px; }
   .contact-kicker { margin-top: 65px; font-size: 11px; }
-  .contact-link { grid-template-columns: minmax(0,1fr) 24px; font-size: clamp(58px, 15.5vw, 88px); }
+  .contact-link { grid-template-columns: minmax(0,1fr) 24px; font-size: clamp(40px, 12vw, 62px); }
   .contact-link > span:last-child { width: 24px; height: 24px; font-size: 19px; }
   .project--subsentry .project-visual h3 { font-size: clamp(46px, 14vw, 66px); }
   .contact-bottom { display: grid; grid-template-columns: 1fr auto; gap: 13px 10px; padding-top: 17px; font-size: 9px; }
@@ -185,7 +185,7 @@ h1 { margin-bottom: clamp(20px, 3.1vw, 40px); font-family: var(--serif); font-si
   h1 { font-size: 77px; }
   .portrait-frame { height: 320px; min-height: 320px; }
   .case-link { font-size: 10px; }
-  .contact-link { font-size: clamp(48px, 15vw, 58px); }
+  .contact-link { font-size: clamp(36px, 11.5vw, 46px); }
   .contact-link > span:last-child { width: 22px; height: 22px; font-size: 18px; }
   .contact-bottom { letter-spacing: .01em; }
 }
