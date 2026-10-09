@@ -7,11 +7,7 @@ let language = storedLanguage === "en" ? "en" : "cs";
 const header = document.querySelector(".site-header");
 const menuButton = document.querySelector(".nav-toggle");
 const wordRevealSelector = [
-  ".opening-note",
   ".work-heading-row h2",
-  ".work-heading-row > p",
-  ".story-layout h2",
-  ".story-layout > p",
   ".contact-kicker",
   ".contact-link > span:first-child"
 ].join(", ");
@@ -42,11 +38,11 @@ function prepareWordReveal() {
 function setLanguage(nextLanguage) {
   language = nextLanguage === "en" ? "en" : "cs";
   document.documentElement.lang = language;
-  document.title = language === "en" ? "Kamil Hortík — personal archive" : "Kamil Hortík — osobní archiv";
+  document.title = language === "en" ? "Kamil Hortík — portfolio" : "Kamil Hortík — portfolio";
   const description = document.querySelector('meta[name="description"]');
   if (description) description.content = language === "en"
-    ? "Kamil Hortík — a personal film archive of selected digital projects."
-    : "Kamil Hortík — osobní filmový archiv vybraných digitálních projektů.";
+    ? "Kamil Hortík — product design and selected digital projects."
+    : "Kamil Hortík — produktový design a digitální projekty.";
   document.querySelectorAll("[data-cs][data-en]").forEach(element => {
     element.textContent = element.dataset[language];
   });
@@ -105,8 +101,8 @@ if ("IntersectionObserver" in window) {
       projectObserver.unobserve(entry.target);
     });
   }, { threshold: .12, rootMargin: "0px 0px -5% 0px" });
-  document.querySelectorAll("[data-reveal-words], .story-note, .contact-link, .contact-kicker").forEach(item => textObserver.observe(item));
+  document.querySelectorAll("[data-reveal-words], .contact-link, .contact-kicker").forEach(item => textObserver.observe(item));
   document.querySelectorAll(".project").forEach(item => projectObserver.observe(item));
 } else {
-  document.querySelectorAll("[data-reveal-words], .story-note, .contact-link, .contact-kicker, .project").forEach(item => item.classList.add("is-revealed"));
+  document.querySelectorAll("[data-reveal-words], .contact-link, .contact-kicker, .project").forEach(item => item.classList.add("is-revealed"));
 }
